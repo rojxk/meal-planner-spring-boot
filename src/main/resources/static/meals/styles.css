@@ -1,0 +1,164 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-container {
+    font-family: 'Source Sans Pro', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.square-div {
+    width: 1000px;
+    height: 100svh;
+    background-color: #f0f0f0; /* Example background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: for a shadow effect */
+}
+
+.top-div {
+    background-color: midnightblue;
+    position: absolute; /* Position absolutely within the square-div */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left if needed, adjust if centered is desired */
+    width: 100%; /* Make it full width if needed */
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-row-div {
+    background-color: #b44444;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.top-middle-div {
+    background-color: coral;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+}
+
+.middle-row-div {
+    background-color: darkorange;
+    position: absolute;
+    top: 190px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.middle-div {
+    background-color: aqua;
+    position: absolute;
+    top: 270px;
+    left: 0;
+    width: 100%;
+    height: calc(100svh - 270px);
+}
+
+
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.fancy-text {
+    font-family: 'Spicy Rice', sans-serif;
+
+}
+
+.button-submit {
+    height: 15px;
+    width: 50px;
+    font-size: 10px;
+    border: 1px solid #b44444;
+    background-color: bisque;
+}
+
+.button-left {
+    height: 50px;
+    width: 120px;
+    background-color: gray;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+}
+
+.button-right {
+    height: 50px;
+    width: 120px;
+    background-color: gray;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+}
+
+.button-submit {
+    height: 50px;
+    width: 120px;
+    background-color: gray;
+    font-size: 20px;
+    position: absolute;
+    padding: 0;
+    border-radius: 5px;
+    border-width: 0;
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make it behave like a button */
+    color: white; /* Text color */
+    cursor: pointer; /* Hand cursor on hover */
+}
+
+.button-submit:hover {
+    background-color: #0056b3; /* Darken on hover */
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide arrows in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/meals/styles.css">
+    <link href="https://fonts.cdnfonts.com/css/spicy-rice" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
+
+</head>
+<body>
+<div class="center-container">
+    <div class="square-div">
+        <div class="top-div">
+            <div class="top-row-div">
+                <a href="/meals/add-meal" class="button-left button-submit"><h3>  +  New Meal</h3></a>
+                <a href="/meals/list" class="button-right button-submit"><h3>Log out</h3></a>
+            </div>
+            <p class="fancy-text">Meal Planner</p>
+
+        </div>
+        <div class="top-middle-div">
+            HELLO
+        </div>
+        <div class="middle-row-div">
+
+
+        </div>
+        <div class="middle-div">
+            <div class="cards-container">
+                <div class="card" th:each="tempMeal : ${meals}">
+                    <h3 th:text="${tempMeal.mealName}"></h3>
+                    <ul>
+                        <li>
+                            <span th:text="${tempMeal.category != null ? tempMeal.category.getCategory() : 'No Category'}"></span>
+                        </li>
+
+                        <li><span th:text="${tempMeal.makingTime}"></span> minutes</li>
+                        <li><span th:text="${tempMeal.portions}"></span> portions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</body>
+</html>
