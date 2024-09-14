@@ -1,9 +1,7 @@
 package com.mealplanner.controller;
 
-import com.mealplanner.entity.Category;
-import com.mealplanner.entity.Ingredient;
-import com.mealplanner.entity.Meal;
-import com.mealplanner.entity.MealDescription;
+import com.mealplanner.dto.IngredientDTO;
+import com.mealplanner.entity.*;
 import com.mealplanner.service.CategoryService;
 import com.mealplanner.service.MealService;
 import com.mealplanner.service.MeasureService;
@@ -12,13 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/meals")
 public class MealController {
+
+    private static final Logger logger = LoggerFactory.getLogger(MealController.class);
 
     private MealService mealService;
 
@@ -54,18 +57,42 @@ public class MealController {
 
 
     @PostMapping("/save")
-    public String saveMeal(@ModelAttribute("meal") Meal theMeal, @RequestParam(value = "categoryId", required = false) String categoryId) {
+    public String saveMeal(@ModelAttribute Meal meal,
+                           @RequestParam(value = "categoryId", required = false) String categoryId,
+                           @RequestParam(value = "ingredients", required = false) List<IngredientDTO> ingredients) {
+
+
+        // Handle category
+
         int catId = Integer.parseInt(categoryId);
         Category category = categoryService.findById(catId);
-        theMeal.setCategory(category);
-        for (Ingredient ingredient : theMeal.getIngredients()) {
-            ingredient.setMeal(theMeal);
+        meal.setCategory(category);
+
+
+
+
+
+        if (ingredients != null) {
+            List<Ingredient> ingredientList = new ArrayList<>();
+            for (IngredientDTO ing : ingredients) {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setIngredient(ing.getName());
+                ingredient.setQuantity(ing.getQuantity());
+                Measure measure = measureService.findById(ing.getMeasureId());
+                ingredient.setMeasure(measure);
+                ingredient.setMeal(meal);
+                ingredientList.add(ingredient);
+            }
+            meal.setIngredients(ingredientList);
         }
-
-
-        mealService.save(theMeal);
+        mealService.save(meal);
         return "redirect:/meals/list";
+
+
+
     }
+
+
 
 
 

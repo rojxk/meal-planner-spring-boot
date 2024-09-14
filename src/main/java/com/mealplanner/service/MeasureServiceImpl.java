@@ -18,7 +18,7 @@ public class MeasureServiceImpl implements MeasureService{
     }
     @Override
     public List<Measure> findAll() {
-        return null;
+        return measureRepository.findAll();
     }
 
     @Override

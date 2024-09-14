@@ -36,16 +36,32 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('ingredientMeasure').value = '';
     }
 
+
     document.querySelector('form').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Add hidden inputs for ingredients
+        // Remove any existing ingredient inputs
+        this.querySelectorAll('input[name^="ingredient"]').forEach(el => el.remove());
+
+        // Add inputs for ingredients
         ingredients.forEach((ing, index) => {
-            this.innerHTML += `
-                <input type="hidden" name="ingredients[${index}].ingredient" value="${ing.name}">
-                <input type="hidden" name="ingredients[${index}].quantity" value="${ing.quantity}">
-                <input type="hidden" name="ingredients[${index}].measure.id" value="${ing.measureId}">
-            `;
+            const nameInput = document.createElement('input');
+            nameInput.type = 'hidden';
+            nameInput.name = `ingredient[${index}].name`;
+            nameInput.value = ing.name;
+            this.appendChild(nameInput);
+
+            const quantityInput = document.createElement('input');
+            quantityInput.type = 'hidden';
+            quantityInput.name = `ingredient[${index}].quantity`;
+            quantityInput.value = ing.quantity;
+            this.appendChild(quantityInput);
+
+            const measureInput = document.createElement('input');
+            measureInput.type = 'hidden';
+            measureInput.name = `ingredient[${index}].measureId`;
+            measureInput.value = ing.measureId;
+            this.appendChild(measureInput);
         });
 
         this.submit();

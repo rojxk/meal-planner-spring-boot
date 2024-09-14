@@ -12,12 +12,4 @@ public class MealplannerApplication {
 		SpringApplication.run(MealplannerApplication.class, args);
 	}
 
-//	@Bean
-//	public CommandLineRunner commandLineRunner(){
-//		return runner -> {
-//			System.out.println("Hello world!");
-//		};
-//
-//	}
-
 }
