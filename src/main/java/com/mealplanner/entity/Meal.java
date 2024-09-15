@@ -18,10 +18,10 @@ public class Meal {
     private String mealName;
 
     @Column(name = "making_time")
-    private int makingTime;
+    private Integer makingTime;
 
     @Column(name = "portions")
-    private int portions;
+    private Integer portions;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "description_id")
@@ -67,19 +67,19 @@ public class Meal {
         this.mealName = mealName;
     }
 
-    public int getMakingTime() {
+    public Integer getMakingTime() {
         return makingTime;
     }
 
-    public void setMakingTime(int makingTime) {
+    public void setMakingTime(Integer makingTime) {
         this.makingTime = makingTime;
     }
 
-    public int getPortions() {
+    public Integer getPortions() {
         return portions;
     }
 
-    public void setPortions(int portions) {
+    public void setPortions(Integer portions) {
         this.portions = portions;
     }
 

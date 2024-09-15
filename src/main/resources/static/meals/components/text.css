@@ -1,0 +1,31 @@
+.plain-text {
+    margin-left: 15px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    color: #330300;
+    font-weight: bold;
+}
+
+.text-min {
+    color: #330300;
+    position: absolute;
+    margin-top: 12px;
+    left: 620px;
+    font-weight: bold;
+}
+
+.text-portions {
+    color: #330300;
+    position: absolute;
+    margin-top: 12px;
+    left: 845px;
+    font-weight: bold;
+}
+
+.fancy-text {
+    font-family: 'Spicy Rice', sans-serif;
+    font-size: 30px;
+    margin-bottom: 5px;
+    color: #330300;
+
+}

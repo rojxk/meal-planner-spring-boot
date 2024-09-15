@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const list = document.getElementById('ingredientsList');
         list.innerHTML = ingredients.map((ing, index) =>
             `<div>${ing.name} - ${ing.quantity} ${ing.measureText} 
-             <button type="button" onclick="removeIngredient(${index})">Remove</button></div>`
+             <button type="button" class="button-main" onclick="removeIngredient(${index})">Remove</button></div>`
         ).join('');
     }
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearIngredientInputs() {
         document.getElementById('ingredientName').value = '';
         document.getElementById('ingredientQuantity').value = '';
-        document.getElementById('ingredientMeasure').value = '';
+        // document.getElementById('ingredientMeasure').value = '';
     }
 
 

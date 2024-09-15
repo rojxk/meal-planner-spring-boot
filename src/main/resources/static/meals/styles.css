@@ -5,6 +5,20 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 20px;
+    background-color: #FFF6EB;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .center-container {
@@ -16,15 +30,24 @@ body, html {
     height: 100vh;
 }
 
-.square-div {
-    width: 1000px;
+.background-div {
+    background-color: #FFFBF6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1020px;
     height: 100svh;
-    background-color: #f0f0f0; /* Example background color */
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: for a shadow effect */
+}
+
+.square-div {
+    width: 1000px;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .top-div {
@@ -39,7 +62,6 @@ body, html {
 }
 
 .top-row-div {
-    background-color: #b44444;
     position: absolute;
     top: 0;
     left: 0;
@@ -58,15 +80,28 @@ body, html {
     height: 120px;
 }
 
-.middle-row-div {
-    background-color: darkorange;
+.top-middle-new-div {
     position: absolute;
-    top: 190px;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(80svh - 500px);
+    padding: 10px 10px 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+}
+
+.middle-row-div {
+    position: absolute;
+    bottom: calc(20svh + 360px);
     left: 0;
     width: 100%;
     height: 50px;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .middle-div {
@@ -76,6 +111,52 @@ body, html {
     left: 0;
     width: 100%;
     height: calc(100svh - 270px);
+}
+
+.middle-add-div {
+    position: absolute;
+    left: 0;
+    bottom: calc(20svh + 80px);
+    height: 280px;
+    width: 100%;
+}
+
+
+
+.middle-ingr-div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: calc(100% - 310px);
+
+}
+
+
+.middle-cat-div {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 300px;
+}
+
+.bottom-div-recipe {
+    height: 20svh;
+    width: 100%;
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+}
+
+.bottom-div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
 }
 
 
@@ -94,59 +175,7 @@ body, html {
     background-color: #fff;
 }
 
-.fancy-text {
-    font-family: 'Spicy Rice', sans-serif;
 
-}
-
-.button-submit {
-    height: 15px;
-    width: 50px;
-    font-size: 10px;
-    border: 1px solid #b44444;
-    background-color: bisque;
-}
-
-.button-left {
-    height: 50px;
-    width: 120px;
-    background-color: gray;
-    font-size: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 5px;
-}
-
-.button-right {
-    height: 50px;
-    width: 120px;
-    background-color: gray;
-    font-size: 20px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 5px;
-}
-
-.button-submit {
-    height: 50px;
-    width: 120px;
-    background-color: gray;
-    font-size: 20px;
-    position: absolute;
-    padding: 0;
-    border-radius: 5px;
-    border-width: 0;
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make it behave like a button */
-    color: white; /* Text color */
-    cursor: pointer; /* Hand cursor on hover */
-}
-
-.button-submit:hover {
-    background-color: #0056b3; /* Darken on hover */
-}
 
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -160,5 +189,39 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+input[type="number"].fld-portion,
+input[type="number"].fld-time {
+    /* Remove default spinner buttons */
+    -moz-appearance: textfield;
+}
 
+input[type="number"].fld-portion::-webkit-inner-spin-button,
+input[type="number"].fld-portion::-webkit-outer-spin-button,
+input[type="number"].fld-time::-webkit-inner-spin-button,
+input[type="number"].fld-time::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
+input[type="number"].fld-portion:empty,
+input[type="number"].fld-portion:not(:focus):invalid,
+input[type="number"].fld-time:empty,
+input[type="number"].fld-time:not(:focus):invalid {
+    /* Show placeholder styles when empty or invalid and not focused */
+    color: #999; /* Placeholder text color */
+}
+
+input[type="number"].fld-portion:focus::-webkit-input-placeholder,
+input[type="number"].fld-time:focus::-webkit-input-placeholder {
+    color: transparent; /* Hide placeholder on focus for WebKit browsers */
+}
+
+input[type="number"].fld-portion:focus::-moz-placeholder,
+input[type="number"].fld-time:focus::-moz-placeholder {
+    color: transparent; /* Hide placeholder on focus for Firefox */
+}
+
+input[type="number"].fld-portion:focus:-ms-input-placeholder,
+input[type="number"].fld-time:focus:-ms-input-placeholder {
+    color: transparent; /* Hide placeholder on focus for IE/Edge */
+}
