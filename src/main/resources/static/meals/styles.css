@@ -49,17 +49,8 @@ a {
     position: relative;
 }
 
-.top-div {
-    background-color: midnightblue;
-    position: absolute; /* Position absolutely within the square-div */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left if needed, adjust if centered is desired */
-    width: 100%; /* Make it full width if needed */
-    height: 70px;
-    justify-content: center;
-    align-items: center;
-}
-
+/* for main, add
+ */
 .top-row-div {
     position: absolute;
     top: 0;
@@ -70,6 +61,8 @@ a {
     margin-bottom: 10px;
 }
 
+/* for main - meal planner
+*/
 .top-middle-div {
     position: absolute;
     top: 70px;
@@ -81,7 +74,9 @@ a {
     align-content: center;
 }
 
-.top-middle-new-div {
+/* for add - new meal
+*/
+.top-middle-add-div {
     position: absolute;
     top: 70px;
     left: 0;
@@ -95,6 +90,8 @@ a {
 
 }
 
+/* for main - searchbar
+*/
 .middle-row-div {
     position: absolute;
     bottom: calc(20svh + 360px);
@@ -105,6 +102,20 @@ a {
     margin-bottom: 10px;
 }
 
+/* for add - meal name
+ */
+.middle-row-add-div {
+    position: absolute;
+    bottom: calc(20svh + 360px);
+    left: 0;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* for main - cards
+ */
 .middle-div {
     position: absolute;
     top: 270px;
@@ -113,8 +124,8 @@ a {
     height: calc(100svh - 270px);
 }
 
-
-
+/* for add - category and ingredients
+ */
 .middle-add-div {
     position: absolute;
     left: 0;
@@ -123,8 +134,8 @@ a {
     width: 100%;
 }
 
-
-
+/* for add - ingredients
+ */
 .middle-ingr-div {
     position: absolute;
     bottom: 0;
@@ -134,7 +145,8 @@ a {
 
 }
 
-
+/* for add - category
+ */
 .middle-cat-div {
     position: absolute;
     right: 0;
@@ -142,6 +154,8 @@ a {
     width: 300px;
 }
 
+/* for add - recipe
+ */
 .bottom-div-recipe {
     height: 20svh;
     width: 100%;
@@ -150,6 +164,8 @@ a {
     left: 0;
 }
 
+/* for add - cancel and save
+ */
 .bottom-div {
     position: absolute;
     bottom: 0;
@@ -161,11 +177,7 @@ a {
 
 }
 
-
-
-
-
-
+/* hide arrows in number input */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -196,7 +208,7 @@ input[type="number"].fld-portion:not(:focus):invalid,
 input[type="number"].fld-time:empty,
 input[type="number"].fld-time:not(:focus):invalid {
     /* Show placeholder styles when empty or invalid and not focused */
-    color: #999; /* Placeholder text color */
+    color: #FFF6EB; /* Placeholder text color */
 }
 
 input[type="number"].fld-portion:focus::-webkit-input-placeholder,

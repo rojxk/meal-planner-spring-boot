@@ -50,13 +50,10 @@ public class MealController {
         return "meals/add-meal-form";
     }
 
-
-
     @PostMapping("/save")
     public String saveMeal(@ModelAttribute Meal meal,
                            @RequestParam(value = "categoryId", required = false) String categoryId,
                            @RequestParam(value = "ingredients", required = false) List<IngredientDTO> ingredients) {
-
 
         // Handle category
 
@@ -84,6 +81,11 @@ public class MealController {
         mealService.save(meal);
 
         return "redirect:/meals/list";
+    }
+
+    @GetMapping("/mymeal")
+    public String showMeal(){
+        return "show-meal";
     }
 
     @InitBinder

@@ -23,7 +23,7 @@
             <a href="/meals/list" class="button-main btn-right">Log out</a>
         </div>
 
-        <div class="top-middle-new-div">
+        <div class="top-middle-add-div">
             <p class="fancy-text"> New Meal</p>
 
         </div>
@@ -35,7 +35,7 @@
             </div>
             <form action="#" th:action="@{/meals/save}" th:object="${meal}" method="POST">
                 <!-- Meal fields -->
-                <div class="middle-row-div">
+                <div class="middle-row-add-div">
                     <input type="hidden" th:field="*{id}">
                     <input type="text" th:field="*{mealName}" class="field-main fld-meal" placeholder="Meal name" oninput="this.value = this.value.replace(/[^A-Za-z0-9\s]/g, '')" required>
                     <input type="number" th:field="*{makingTime}" th:value="${makingTime != null ? makingTime : ''}" class="field-main fld-time" placeholder="Making time" min="1" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
