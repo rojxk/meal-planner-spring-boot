@@ -71,12 +71,14 @@ a {
 }
 
 .top-middle-div {
-    background-color: coral;
     position: absolute;
     top: 70px;
     left: 0;
     width: 100%;
     height: 120px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
 }
 
 .top-middle-new-div {
@@ -104,13 +106,14 @@ a {
 }
 
 .middle-div {
-    background-color: aqua;
     position: absolute;
     top: 270px;
     left: 0;
     width: 100%;
     height: calc(100svh - 270px);
 }
+
+
 
 .middle-add-div {
     position: absolute;

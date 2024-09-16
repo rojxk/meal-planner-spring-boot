@@ -6,6 +6,12 @@
     font-weight: bold;
 }
 
+.cards-text {
+    margin: 0;
+    color: #330300;
+    font-weight: bold;
+}
+
 .text-min {
     color: #330300;
     position: absolute;
@@ -23,8 +29,8 @@
 }
 
 .fancy-text {
-    font-family: 'Spicy Rice', sans-serif;
-    font-size: 30px;
+    font-family: 'Koulen', serif;
+    font-size: 35px;
     margin-bottom: 5px;
     color: #330300;
 
