@@ -1,6 +1,7 @@
 package com.mealplanner.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,22 @@ public class Meal {
     @Column(name = "id")
     private Integer id;
 
+    @NotNull(message="Meal name is required")
+    @Size(min=1, message="Meal name is required")
+    @Size(max = 80, message="Too long name")
     @Column(name = "meal_name")
     private String mealName;
 
+
+    @Min(value = 1, message = "Making time must be at least 1 minute")
+    @Max(value = 9999, message = "Making time must not exceed 9999 minutes")
     @Column(name = "making_time")
     private Integer makingTime;
 
+
+    @NotNull(message = "Serving size is required")
+    @Min(value = 1, message = "Portions must be at least 1")
+    @Max(value = 9999, message = "Portions must not exceed 9999")
     @Column(name = "portions")
     private Integer portions;
 

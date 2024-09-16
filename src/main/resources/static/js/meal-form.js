@@ -17,11 +17,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to limit input length
+    function limitInputLength(input, maxLength) {
+        if (input.value.length > maxLength) {
+            input.value = input.value.slice(0, maxLength);
+        }
+    }
+
+    // Function to allow only alphanumeric and space characters
+    function allowAlphanumericAndSpace(input) {
+        input.value = input.value.replace(/[^A-Za-z0-9\s]/g, '');
+    }
+
+    // Add event listeners for ingredient name and quantity inputs
+    const ingredientNameInput = document.getElementById('ingredientName');
+    const ingredientQuantityInput = document.getElementById('ingredientQuantity');
+
+    if (ingredientNameInput) {
+        ingredientNameInput.addEventListener('input', function() {
+            limitInputLength(this,40);
+            allowAlphanumericAndSpace(this);
+        });
+    }
+
+    if (ingredientQuantityInput) {
+        ingredientQuantityInput.addEventListener('input', function() {
+            limitInputLength(this, 6);
+        });
+    }
+
+
+
     function updateIngredientsList() {
         const list = document.getElementById('ingredientsList');
         list.innerHTML = ingredients.map((ing, index) =>
-            `<div>${ing.name} - ${ing.quantity} ${ing.measureText} 
-             <button type="button" class="button-main" onclick="removeIngredient(${index})">Remove</button></div>`
+            `<div class="ingredient-item">
+            <span class="ingredient-text">${ing.name} - ${ing.quantity} ${ing.measureText}</span>
+            <button type="button" class="button-remove" onclick="removeIngredient(${index})">Remove</button>
+            </div>`
         ).join('');
     }
 

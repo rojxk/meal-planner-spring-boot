@@ -6,22 +6,18 @@ import com.mealplanner.service.CategoryService;
 import com.mealplanner.service.MealService;
 import com.mealplanner.service.MeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Controller
 @RequestMapping("/meals")
 public class MealController {
-
-    private static final Logger logger = LoggerFactory.getLogger(MealController.class);
 
     private MealService mealService;
 
@@ -64,12 +60,11 @@ public class MealController {
 
         // Handle category
 
-        int catId = Integer.parseInt(categoryId);
-        Category category = categoryService.findById(catId);
-        meal.setCategory(category);
-
-
-
+        if (categoryId != null){
+            int catId = Integer.parseInt(categoryId);
+            Category category = categoryService.findById(catId);
+            meal.setCategory(category);
+        }
 
 
         if (ingredients != null) {
@@ -85,11 +80,16 @@ public class MealController {
             }
             meal.setIngredients(ingredientList);
         }
+
         mealService.save(meal);
+
         return "redirect:/meals/list";
+    }
 
-
-
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder){
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
 

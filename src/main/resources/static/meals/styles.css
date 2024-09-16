@@ -6,7 +6,6 @@ body, html {
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    background-color: #FFF6EB;
 }
 
 input {
@@ -160,20 +159,6 @@ a {
 }
 
 
-
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
 
 
 

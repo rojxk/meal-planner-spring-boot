@@ -37,7 +37,7 @@
                 <!-- Meal fields -->
                 <div class="middle-row-div">
                     <input type="hidden" th:field="*{id}">
-                    <input type="text" th:field="*{mealName}" class="field-main fld-meal" placeholder="Meal name" oninput="this.value = this.value.replace(/[^A-Za-z0-9\s]/g, '' , required)">
+                    <input type="text" th:field="*{mealName}" class="field-main fld-meal" placeholder="Meal name" oninput="this.value = this.value.replace(/[^A-Za-z0-9\s]/g, '')" required>
                     <input type="number" th:field="*{makingTime}" th:value="${makingTime != null ? makingTime : ''}" class="field-main fld-time" placeholder="Making time" min="1" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
                     <p class="text-min">min</p>
                     <input type="number" th:field="*{portions}" th:value="${portions != null ? portions : ''}" class="field-main fld-portion" placeholder="Serving size" min="1" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
@@ -77,7 +77,7 @@
 
                     <div class="middle-ingr-div">
                         <input class="field-main fld-ingredient" type="text" id="ingredientName" placeholder="Ingredient name">
-                        <input type="number" class="field-main fld-quantity "id="ingredientQuantity" placeholder="Quantity" step="0.01">
+                        <input type="number" class="field-main fld-quantity "id="ingredientQuantity" placeholder="Quantity" step="0.01" >
                         <select id="ingredientMeasure" class="button-main btn-measure">
                             <option th:each="measure : ${measures}" th:value="${measure.id}" th:text="${measure.measure}"></option>
                         </select>

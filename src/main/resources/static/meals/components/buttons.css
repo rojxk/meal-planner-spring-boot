@@ -56,6 +56,19 @@
     right: 130px;
 }
 
+.button-remove {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-remove:hover {
+    background-color: #e0e0e0;
+}
+
 
 .category-buttons {
     margin: 0;
@@ -86,6 +99,7 @@
     background-color: #6495ED;
     color: white;
     border: 2px #330300;
+    font-weight: bold;
 
 }
 
