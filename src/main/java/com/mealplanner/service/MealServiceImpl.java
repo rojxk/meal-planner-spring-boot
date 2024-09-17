@@ -4,6 +4,7 @@ import com.mealplanner.dao.IngredientRepository;
 import com.mealplanner.dao.MealRepository;
 import com.mealplanner.entity.Ingredient;
 import com.mealplanner.entity.Meal;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,12 @@ public class MealServiceImpl implements MealService{
 
     @Override
     public Meal findById(Integer id) {
-        return null;
+        if (id == null) {
+            throw new IllegalArgumentException("Meal id cannot be null");
+        }
+        return mealRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Meal not found with id: " + id));
+
     }
 
     @Override
@@ -38,9 +44,15 @@ public class MealServiceImpl implements MealService{
         if (meal.getMealDescription() != null) {
             meal.getMealDescription().setMeal(meal);
         }
-        for (Ingredient ingredient : meal.getIngredients()) {
-            ingredientRepository.save(ingredient);
+
+        if (meal.getIngredients() != null) {
+            for (Ingredient ingredient : meal.getIngredients()) {
+                ingredient.setMeal(meal);
+
+            }
         }
+
+
         return mealRepository.save(meal);
     }
 
@@ -52,6 +64,14 @@ public class MealServiceImpl implements MealService{
     @Override
     public List<Meal> findAllMealsWithCategory() {
         return mealRepository.findAllWithCategory();
+    }
+
+    @Override
+    public Meal findMealWithAllInfoById(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Meal id cannot be null");
+        }
+        return mealRepository.findMealWithAllInfoById(id);
     }
 
 }

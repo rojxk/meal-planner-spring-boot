@@ -142,6 +142,16 @@ public class Meal {
         return this.ingredients;
     }
 
+    public void addIngredient(Ingredient ingredient) {
+        getIngredients().add(ingredient);
+        ingredient.setMeal(this);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        getIngredients().remove(ingredient);
+        ingredient.setMeal(null);
+    }
+
     @Override
     public String toString() {
         return "Meal{" +

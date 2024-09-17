@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show meal</title>
+    <link rel="stylesheet" href="/meals/styles.css">
+    <link rel="stylesheet" href="/meals/components/buttons.css">
+    <link rel="stylesheet" href="/meals/components/fields.css">
+    <link rel="stylesheet" href="/meals/components/text.css">
+    <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
+</head>
+<body>
+<div class="center-container">
+    <div class="background-div">
+        <div class="square-div">
+            <div class="top-row-div">
+                <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
+                <p class="top-meal-planner">Meal Planner</p>
+                <a th:href="@{/meals/list}" class="button-main btn-right">Log out</a>
+            </div>
+
+            <div class="top-middle-add-div">
+                <p class="fancy-text" th:text="${meal.mealName}"></p>
+            </div>
+
+            HELLO
+            <p th:text="${meal != null} ? ${meal.mealName} : 'Meal is null'"></p>
+            <p th:text="${meal}"></p>
+            <p th:text="${meal.ingredients}"></p>
+            <p th:text="${meal.mealDescription}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

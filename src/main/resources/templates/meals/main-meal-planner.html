@@ -32,20 +32,24 @@
         </div>
         <div class="middle-div">
             <div class="cards-container">
-                <div class="card" th:each="tempMeal : ${meals}">
-                    <div class="card-title">
-                        <p class="cards-text" th:text="${tempMeal.mealName}"></p>
+                <a th:href="@{/meals/show-meal(mealId=${tempMeal.id})}" class="card" th:each="tempMeal : ${meals}">
+                    <input type="hidden" name="mealId" th:value="${tempMeal.id}" />
+                    <div class="card-content">
+                        <div class="card-title">
+                            <p class="cards-text" th:text="${tempMeal.mealName}"></p>
+                        </div>
+                        <ul class="card-inside">
+                            <li class="card-list"><span th:text="${tempMeal.category != null ? tempMeal.category.getCategory() : 'No Category'}"></span></li>
+                            <li class="card-list"><span th:text="${tempMeal.makingTime}"></span> minutes</li>
+                            <li class="card-list"><span th:text="${tempMeal.portions}"></span> portions</li>
+                        </ul>
                     </div>
-                    <ul class="card-inside">
-                        <li class="card-list"><span th:text="${tempMeal.category != null ? tempMeal.category.getCategory() : 'No Category'}"></span></li>
-                        <li class="card-list"><span th:text="${tempMeal.makingTime}"></span> minutes</li>
-                        <li class="card-list"><span th:text="${tempMeal.portions}"></span> portions</li>
-                    </ul>
-                </div>
+                </a>
             </div>
         </div>
     </div>
     </div>
 </div>
+
 </body>
 </html>

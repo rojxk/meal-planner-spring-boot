@@ -3,6 +3,7 @@ package com.mealplanner.controller;
 import com.mealplanner.dto.IngredientDTO;
 import com.mealplanner.entity.*;
 import com.mealplanner.service.CategoryService;
+import com.mealplanner.service.IngredientService;
 import com.mealplanner.service.MealService;
 import com.mealplanner.service.MeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +15,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/meals")
 public class MealController {
 
-    private MealService mealService;
+    private static final Logger logger = LoggerFactory.getLogger(MealController.class);
 
+
+    private MealService mealService;
     private CategoryService categoryService;
     private MeasureService measureService;
 
+    private IngredientService ingredientService;
 
     @Autowired
-    public MealController(MealService mealService, CategoryService categoryService,MeasureService measureService){
+    public MealController(MealService mealService, CategoryService categoryService, MeasureService measureService, IngredientService ingredientService){
         this.mealService = mealService;
         this.categoryService = categoryService;
         this.measureService = measureService;
+        this.ingredientService = ingredientService;
     }
 
 
@@ -62,10 +69,12 @@ public class MealController {
             Category category = categoryService.findById(catId);
             meal.setCategory(category);
         }
+        logger.debug("After category");
 
 
         if (ingredients != null) {
-            List<Ingredient> ingredientList = new ArrayList<>();
+
+            logger.debug("Processing ingredients");
             for (IngredientDTO ing : ingredients) {
                 Ingredient ingredient = new Ingredient();
                 ingredient.setIngredient(ing.getName());
@@ -73,19 +82,29 @@ public class MealController {
                 Measure measure = measureService.findById(ing.getMeasureId());
                 ingredient.setMeasure(measure);
                 ingredient.setMeal(meal);
-                ingredientList.add(ingredient);
+                meal.addIngredient(ingredient);
+                logger.debug("ingredient"+ingredient);
+                //ingredientService.save(ingredient);
             }
-            meal.setIngredients(ingredientList);
         }
+
+        logger.debug("Before save");
 
         mealService.save(meal);
 
         return "redirect:/meals/list";
     }
 
-    @GetMapping("/mymeal")
-    public String showMeal(){
-        return "show-meal";
+    @GetMapping("/show-meal")
+    public String showMeal(@RequestParam("mealId") Integer mealId, Model theModel){
+        Meal meal = mealService.findMealWithAllInfoById(mealId);
+        if (meal != null){
+            theModel.addAttribute("meal", meal);
+            return "meals/show-meal";
+        } else {
+            return "redirect:/meals/list";
+        }
+
     }
 
     @InitBinder
@@ -93,11 +112,6 @@ public class MealController {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
-
-
-
-
-
 
 
 }

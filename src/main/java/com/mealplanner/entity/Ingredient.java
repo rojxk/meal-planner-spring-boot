@@ -84,4 +84,6 @@ public class Ingredient {
                 ", quantity=" + quantity +
                 '}';
     }
+
+
 }

@@ -20,7 +20,7 @@
         <div class="top-row-div">
             <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
             <p class="top-meal-planner">Meal Planner</p>
-            <a href="/meals/list" class="button-main btn-right">Log out</a>
+            <a th:href="@{/meals/list}" class="button-main btn-right">Log out</a>
         </div>
 
         <div class="top-middle-add-div">
@@ -30,9 +30,6 @@
 
 
         <div>
-            <div>
-                <p class="fancy-text">New Meal</p>
-            </div>
             <form action="#" th:action="@{/meals/save}" th:object="${meal}" method="POST">
                 <!-- Meal fields -->
                 <div class="middle-row-add-div">

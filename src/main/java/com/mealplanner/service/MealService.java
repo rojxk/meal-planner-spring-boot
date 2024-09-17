@@ -14,6 +14,8 @@ public interface MealService {
 
     List<Meal> findAllMealsWithCategory();
 
+    Meal findMealWithAllInfoById(Integer id);
+
 
 
 }
