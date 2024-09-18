@@ -108,6 +108,16 @@ public class MealController {
 
     }
 
+    @GetMapping("/update-meal")
+    public String updateMeal(@RequestParam("mealId") Integer mealId, Model theModel){
+        Meal meal = mealService.findMealWithAllInfoById(mealId);
+        theModel.addAttribute("meal", meal);
+        theModel.addAttribute("categories", categoryService.findAll());
+        theModel.addAttribute("measures", measureService.findAll());
+        return "meals/add-meal-form";
+
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder dataBinder){
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
