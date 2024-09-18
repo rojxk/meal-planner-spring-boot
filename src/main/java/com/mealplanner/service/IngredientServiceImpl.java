@@ -31,6 +31,7 @@ public class IngredientServiceImpl implements IngredientService{
     @Override
     @Transactional
     public Ingredient save(Ingredient ingredient) {
+
         if (ingredient.getMeal() != null) {
             ingredient.getMeal().getIngredients().add(ingredient);
         }

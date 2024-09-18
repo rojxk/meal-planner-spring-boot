@@ -2,6 +2,7 @@ package com.mealplanner.service;
 
 import com.mealplanner.dao.MeasureRepository;
 import com.mealplanner.entity.Measure;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,13 @@ public class MeasureServiceImpl implements MeasureService{
     }
 
     @Override
-    public Measure findById(Integer id){return null;
+    public Measure findById(Integer id){
+        if (id == null) {
+            throw new IllegalArgumentException("Category id cannot be null");
+        }
+        return measureRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + id));
+
     }
 
     @Override

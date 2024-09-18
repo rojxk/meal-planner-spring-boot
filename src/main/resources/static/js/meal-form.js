@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let ingredients = [];
 
     window.addIngredient = function() {
-        const name = document.getElementById('ingredientName').value;
+        const ingredient = document.getElementById('ingredientName').value;
         const quantity = document.getElementById('ingredientQuantity').value;
         const measureSelect = document.getElementById('ingredientMeasure');
         const measureId = measureSelect.value;
         const measureText = measureSelect.options[measureSelect.selectedIndex].text;
 
-        if (name && quantity && measureId) {
-            ingredients.push({ name, quantity, measureId, measureText });
+        if (ingredient && quantity && measureId) {
+            ingredients.push({ ingredient, quantity, measureId, measureText });
             updateIngredientsList();
             clearIngredientInputs();
         } else {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const list = document.getElementById('ingredientsList');
         list.innerHTML = ingredients.map((ing, index) =>
             `<div class="ingredient-item">
-            <span class="ingredient-text">${ing.name} - ${ing.quantity} ${ing.measureText}</span>
+            <span class="ingredient-text">${ing.ingredient} - ${ing.quantity} ${ing.measureText}</span>
             <button type="button" class="button-remove" onclick="removeIngredient(${index})">Remove</button>
             </div>`
         ).join('');
@@ -74,25 +74,24 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         // Remove any existing ingredient inputs
-        this.querySelectorAll('input[name^="ingredient"]').forEach(el => el.remove());
+        this.querySelectorAll('input[name^="ingredients"]').forEach(el => el.remove());
 
-        // Add inputs for ingredients
         ingredients.forEach((ing, index) => {
-            const nameInput = document.createElement('input');
-            nameInput.type = 'hidden';
-            nameInput.name = `ingredient[${index}].name`;
-            nameInput.value = ing.name;
-            this.appendChild(nameInput);
+            const ingredientInput = document.createElement('input');
+            ingredientInput.type = 'hidden';
+            ingredientInput.name = `ingredients[${index}].ingredient`;
+            ingredientInput.value = ing.ingredient;
+            this.appendChild(ingredientInput);
 
             const quantityInput = document.createElement('input');
             quantityInput.type = 'hidden';
-            quantityInput.name = `ingredient[${index}].quantity`;
+            quantityInput.name = `ingredients[${index}].quantity`;
             quantityInput.value = ing.quantity;
             this.appendChild(quantityInput);
 
             const measureInput = document.createElement('input');
             measureInput.type = 'hidden';
-            measureInput.name = `ingredient[${index}].measureId`;
+            measureInput.name = `ingredients[${index}].measure.id`;
             measureInput.value = ing.measureId;
             this.appendChild(measureInput);
         });

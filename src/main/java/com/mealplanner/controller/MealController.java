@@ -1,6 +1,5 @@
 package com.mealplanner.controller;
 
-import com.mealplanner.dto.IngredientDTO;
 import com.mealplanner.entity.*;
 import com.mealplanner.service.CategoryService;
 import com.mealplanner.service.IngredientService;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,12 +57,11 @@ public class MealController {
 
     @PostMapping("/save")
     public String saveMeal(@ModelAttribute Meal meal,
-                           @RequestParam(value = "categoryId", required = false) String categoryId,
-                           @RequestParam(value = "ingredients", required = false) List<IngredientDTO> ingredients) {
+                           @RequestParam(value = "categoryId", required = false) String categoryId) {
 
         // Handle category
-
         if (categoryId != null){
+            logger.debug("inside category");
             int catId = Integer.parseInt(categoryId);
             Category category = categoryService.findById(catId);
             meal.setCategory(category);
@@ -72,20 +69,24 @@ public class MealController {
         logger.debug("After category");
 
 
-        if (ingredients != null) {
 
-            logger.debug("Processing ingredients");
-            for (IngredientDTO ing : ingredients) {
-                Ingredient ingredient = new Ingredient();
-                ingredient.setIngredient(ing.getName());
-                ingredient.setQuantity(ing.getQuantity());
-                Measure measure = measureService.findById(ing.getMeasureId());
-                ingredient.setMeasure(measure);
-                ingredient.setMeal(meal);
-                meal.addIngredient(ingredient);
-                logger.debug("ingredient"+ingredient);
-                //ingredientService.save(ingredient);
+        // Process ingredients and their measures
+        List<Ingredient> ingredients = meal.getIngredients();
+        if (ingredients != null && !ingredients.isEmpty()) {
+            logger.debug("Processing {} ingredients", ingredients.size());
+
+            for (Ingredient ingredient : ingredients) {
+                if (ingredient.getMeasure() != null && ingredient.getMeasure().getId() != null) {
+                    logger.debug("Processing measure for ingredient: {}", ingredient.getIngredient());
+                    logger.debug(ingredient.getMeasure().toString());
+                    Measure measure = measureService.findById(ingredient.getMeasure().getId());
+                    ingredient.setMeasure(measure);
+                }
+
+                logger.debug(ingredient.toString());
             }
+        } else {
+            logger.warn("No ingredients provided in the meal");
         }
 
         logger.debug("Before save");
