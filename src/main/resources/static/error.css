@@ -1,0 +1,15 @@
+.error {
+    font-family: 'Koulen', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #330300;
+    margin-bottom: 0;
+}
+
+.error-text {
+    font-family: 'Koulen', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #330300;
+    margin-top: 0;
+}

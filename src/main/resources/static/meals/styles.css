@@ -49,6 +49,16 @@ a {
     position: relative;
 }
 
+.error-div {
+    width: 1000px;
+    height: 100svh;
+    display: inline-grid;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+
+}
+
 /* for main, add
  */
 .top-row-div {
