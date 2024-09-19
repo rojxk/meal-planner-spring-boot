@@ -55,6 +55,16 @@ public class MealController {
         return "meals/add-meal-form";
     }
 
+    @GetMapping("/update-meal")
+    public String updateMeal(@RequestParam("mealId") Integer mealId, Model theModel){
+        Meal meal = mealService.findMealWithAllInfoById(mealId);
+        theModel.addAttribute("meal", meal);
+        theModel.addAttribute("categories", categoryService.findAll());
+        theModel.addAttribute("measures", measureService.findAll());
+        return "meals/update-meal-form";
+
+    }
+
     @PostMapping("/save")
     public String saveMeal(@ModelAttribute Meal meal,
                            @RequestParam(value = "categoryId", required = false) String categoryId) {
@@ -108,14 +118,45 @@ public class MealController {
 
     }
 
-    @GetMapping("/update-meal")
-    public String updateMeal(@RequestParam("mealId") Integer mealId, Model theModel){
-        Meal meal = mealService.findMealWithAllInfoById(mealId);
-        theModel.addAttribute("meal", meal);
-        theModel.addAttribute("categories", categoryService.findAll());
-        theModel.addAttribute("measures", measureService.findAll());
-        return "meals/add-meal-form";
 
+    @PostMapping("/save-update")
+    public String saveUpdate(@ModelAttribute Meal meal,
+                             @RequestParam(value = "categoryId", required = false) String categoryId){
+        // Handle category
+        if (categoryId != null){
+            logger.debug("inside category");
+            int catId = Integer.parseInt(categoryId);
+            Category category = categoryService.findById(catId);
+            meal.setCategory(category);
+        }
+        logger.debug("After category");
+
+        ingredientService.deleteByMealId(meal.getId());
+
+        // Process ingredients and their measures
+        List<Ingredient> ingredients = meal.getIngredients();
+        if (ingredients != null && !ingredients.isEmpty()) {
+            logger.debug("Processing {} ingredients", ingredients.size());
+
+            for (Ingredient ingredient : ingredients) {
+                if (ingredient.getMeasure() != null && ingredient.getMeasure().getId() != null) {
+                    logger.debug("Processing measure for ingredient: {}", ingredient.getIngredient());
+                    logger.debug(ingredient.getMeasure().toString());
+                    Measure measure = measureService.findById(ingredient.getMeasure().getId());
+                    ingredient.setMeasure(measure);
+                }
+
+                logger.debug(ingredient.toString());
+            }
+        } else {
+            logger.warn("No ingredients provided in the meal");
+        }
+
+        logger.debug("Before save");
+
+        mealService.save(meal);
+
+        return"redirect:/meals/list";
     }
 
     @InitBinder

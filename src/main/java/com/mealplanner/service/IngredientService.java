@@ -10,4 +10,6 @@ public interface IngredientService {
     Ingredient findById(Integer id);
     Ingredient save(Ingredient ingredient);
     void deleteById(int id);
+
+    void deleteByMealId(Integer id);
 }

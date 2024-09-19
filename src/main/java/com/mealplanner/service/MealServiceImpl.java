@@ -74,4 +74,29 @@ public class MealServiceImpl implements MealService{
         return mealRepository.findMealWithAllInfoById(id);
     }
 
+    @Override
+    @Transactional
+    public Meal update(Meal meal) {
+        // Save the meal first to ensure it has an ID
+        mealRepository.save(meal);
+
+        // Handle ingredients
+        if (meal.getIngredients() != null) {
+            for (Ingredient ingredient : meal.getIngredients()) {
+                if (ingredient.isDeleted()) {
+                    // Remove the ingredient if it's marked as deleted
+                    if (ingredient.getId() != null) {
+                        ingredientRepository.deleteById(ingredient.getId());
+                    }
+                } else {
+                    // Save or update the ingredient
+                    ingredient.setMeal(meal);
+                    ingredientRepository.save(ingredient);
+                }
+            }
+        }
+
+        return meal;
+    }
+
 }

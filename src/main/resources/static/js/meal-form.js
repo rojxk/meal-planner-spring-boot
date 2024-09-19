@@ -1,6 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
     let ingredients = [];
 
+    const existingIngredients = document.querySelectorAll('[data-ingredient]');
+    if (existingIngredients.length > 0) {
+        existingIngredients.forEach(ing => {
+            ingredients.push({
+                ingredient: ing.dataset.ingredient,
+                quantity: ing.dataset.quantity,
+                measureId: ing.dataset.measureId,
+                measureText: ing.dataset.measureText
+            });
+        });
+        updateIngredientsList();
+    }
+
     window.addIngredient = function() {
         const ingredient = document.getElementById('ingredientName').value;
         const quantity = document.getElementById('ingredientQuantity').value;

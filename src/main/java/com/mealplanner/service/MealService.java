@@ -16,6 +16,8 @@ public interface MealService {
 
     Meal findMealWithAllInfoById(Integer id);
 
+    Meal update(Meal meal);
+
 
 
 }

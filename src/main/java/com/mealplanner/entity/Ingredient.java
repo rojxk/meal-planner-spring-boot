@@ -23,9 +23,12 @@ public class Ingredient {
     @JoinColumn(name = "meal_id")
     private Meal meal;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "measure_id")
     private Measure measure;
+
+    @Transient
+    private boolean deleted;
 
     public Ingredient(){
 
@@ -74,6 +77,14 @@ public class Ingredient {
 
     public void setMeasure(Measure measure) {
         this.measure = measure;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override

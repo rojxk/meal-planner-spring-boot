@@ -2,6 +2,8 @@ package com.mealplanner.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "measure")
 public class Measure {
@@ -13,8 +15,10 @@ public class Measure {
     @Column(name = "measure")
     private String measure;
 
-    @OneToOne(mappedBy = "measure")
-    private Ingredient ingredient;
+    @OneToMany(mappedBy = "measure",
+                fetch = FetchType.LAZY,
+                cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}                )
+    private List<Ingredient> ingredients;
 
     public Measure(){
 
@@ -40,20 +44,19 @@ public class Measure {
         this.measure = measure;
     }
 
-    public Ingredient getIngredient() {
-        return ingredient;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Override
     public String toString() {
         return "Measure{" +
                 "id=" + id +
-                ", measure='" + measure + '\'' +
-                ", ingredient=" + ingredient +
+                ", measure='" + measure +
                 '}';
     }
 }
