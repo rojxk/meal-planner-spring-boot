@@ -57,7 +57,10 @@ public class MealServiceImpl implements MealService{
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Integer id) {
+        if (id != null){
+            mealRepository.deleteById(id);
+        }
 
     }
 

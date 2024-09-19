@@ -113,6 +113,12 @@ public class MealController {
         }
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam("mealId") int theId){
+        mealService.deleteById(theId);
+        return "redirect:/meals/list";
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder dataBinder){
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);

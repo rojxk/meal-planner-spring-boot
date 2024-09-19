@@ -10,7 +10,7 @@ public interface MealService {
     List<Meal> findAll();
     Meal findById(Integer id);
     Meal save(Meal meal);
-    void deleteById(int id);
+    void deleteById(Integer id);
 
     List<Meal> findAllMealsWithCategory();
 
