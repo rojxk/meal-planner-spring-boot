@@ -1,93 +1,89 @@
-document.addEventListener('DOMContentLoaded', function() {
-    let ingredients = [];
+// Global variables
+let ingredients = [];
 
+// Function definitions
+function loadExistingIngredients() {
     const existingIngredients = document.querySelectorAll('[data-ingredient]');
-    if (existingIngredients.length > 0) {
-        existingIngredients.forEach(ing => {
-            ingredients.push({
-                ingredient: ing.dataset.ingredient,
-                quantity: ing.dataset.quantity,
-                measureId: ing.dataset.measureId,
-                measureText: ing.dataset.measureText
-            });
+    existingIngredients.forEach(ing => {
+        ingredients.push({
+            ingredient: ing.dataset.ingredient,
+            quantity: ing.dataset.quantity,
+            measureId: ing.dataset.measureId,
+            measureText: ing.dataset.measureText
         });
-        updateIngredientsList();
-    }
+    });
+    updateIngredientsList();
+}
 
-    window.addIngredient = function() {
-        const ingredient = document.getElementById('ingredientName').value;
-        const quantity = document.getElementById('ingredientQuantity').value;
-        const measureSelect = document.getElementById('ingredientMeasure');
-        const measureId = measureSelect.value;
-        const measureText = measureSelect.options[measureSelect.selectedIndex].text;
-
-        if (ingredient && quantity && measureId) {
-            ingredients.push({ ingredient, quantity, measureId, measureText });
-            updateIngredientsList();
-            clearIngredientInputs();
-        } else {
-            alert('Please fill all ingredient fields');
-        }
-    }
-
-    // Function to limit input length
-    function limitInputLength(input, maxLength) {
-        if (input.value.length > maxLength) {
-            input.value = input.value.slice(0, maxLength);
-        }
-    }
-
-    // Function to allow only alphanumeric and space characters
-    function allowAlphanumericAndSpace(input) {
-        input.value = input.value.replace(/[^A-Za-z0-9\s]/g, '');
-    }
-
-    // Add event listeners for ingredient name and quantity inputs
-    const ingredientNameInput = document.getElementById('ingredientName');
-    const ingredientQuantityInput = document.getElementById('ingredientQuantity');
-
-    if (ingredientNameInput) {
-        ingredientNameInput.addEventListener('input', function() {
-            limitInputLength(this,40);
-            allowAlphanumericAndSpace(this);
-        });
-    }
-
-    if (ingredientQuantityInput) {
-        ingredientQuantityInput.addEventListener('input', function() {
-            limitInputLength(this, 6);
-        });
-    }
-
-
-
-    function updateIngredientsList() {
-        const list = document.getElementById('ingredientsList');
-        list.innerHTML = ingredients.map((ing, index) =>
-            `<div class="ingredient-item">
+function updateIngredientsList() {
+    const list = document.getElementById('ingredientsList');
+    list.innerHTML = ingredients.map((ing, index) =>
+        `<div class="ingredient-item">
             <span class="ingredient-text">${ing.ingredient} - ${ing.quantity} ${ing.measureText}</span>
             <button type="button" class="button-remove" onclick="removeIngredient(${index})">Remove</button>
-            </div>`
-        ).join('');
-    }
+        </div>`
+    ).join('');
+}
 
-    window.removeIngredient = function(index) {
-        ingredients.splice(index, 1);
+function addIngredient() {
+    const ingredient = document.getElementById('ingredientName').value;
+    const quantity = document.getElementById('ingredientQuantity').value;
+    const measureSelect = document.getElementById('ingredientMeasure');
+    const measureId = measureSelect.value;
+    const measureText = measureSelect.options[measureSelect.selectedIndex].text;
+
+    if (ingredient && quantity && measureId) {
+        ingredients.push({ ingredient, quantity, measureId, measureText });
         updateIngredientsList();
+        clearIngredientInputs();
+    } else {
+        alert('Please fill all ingredient fields');
+    }
+}
+
+function removeIngredient(index) {
+    ingredients.splice(index, 1);
+    updateIngredientsList();
+}
+
+function clearIngredientInputs() {
+    document.getElementById('ingredientName').value = '';
+    document.getElementById('ingredientQuantity').value = '';
+    document.getElementById('ingredientMeasure').selectedIndex = 0;
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded and parsed");
+
+    // Check if it's an update scenario
+    const isUpdateScenario = document.querySelector('[data-ingredient]') !== null;
+
+    if (isUpdateScenario) {
+        console.log("Update scenario detected");
+        loadExistingIngredients();
+    } else {
+        console.log("New meal scenario");
     }
 
-    function clearIngredientInputs() {
-        document.getElementById('ingredientName').value = '';
-        document.getElementById('ingredientQuantity').value = '';
-        // document.getElementById('ingredientMeasure').value = '';
+    // Add event listener for the Add Ingredient button
+    const addButton = document.querySelector('.btn-right[onclick="addIngredient()"]');
+    if (addButton) {
+        addButton.onclick = addIngredient;
     }
 
-
+    // Form submission event listener
     document.querySelector('form').addEventListener('submit', function(e) {
         e.preventDefault();
 
         // Remove any existing ingredient inputs
         this.querySelectorAll('input[name^="ingredients"]').forEach(el => el.remove());
+
+        // Remove the hidden div containing old ingredient data
+        const oldIngredientsDiv = this.querySelector('div[style="display: none;"]');
+        if (oldIngredientsDiv) {
+            oldIngredientsDiv.remove();
+        }
 
         ingredients.forEach((ing, index) => {
             const ingredientInput = document.createElement('input');

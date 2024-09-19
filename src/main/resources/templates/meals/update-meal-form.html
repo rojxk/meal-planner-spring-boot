@@ -15,103 +15,102 @@
 <body>
 <div class="center-container">
     <div class="background-div">
-    <div class="square-div">
+        <div class="square-div">
 
-        <div class="top-row-div">
-            <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
-            <p class="top-meal-planner">Meal Planner</p>
-            <a th:href="@{/meals/list}" class="button-main btn-right">Log out</a>
-        </div>
+            <div class="top-row-div">
+                <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
+                <p class="top-meal-planner">Meal Planner</p>
+                <a th:href="@{/meals/list}" class="button-main btn-right">Log out</a>
+            </div>
 
-        <div class="top-middle-add-div">
-            <p class="fancy-text"> New Meal</p>
+            <div class="top-middle-add-div">
+                <p class="fancy-text">Update Meal</p>
 
-        </div>
-
-
-        <div>
-            <form action="#" th:action="@{/meals/save-update}" th:object="${meal}" method="POST">
-                <!-- Meal fields -->
-                <div class="middle-row-add-div">
-                    <input type="hidden" th:field="*{id}">
-                    <input type="text" th:field="*{mealName}" class="field-main fld-meal" placeholder="Meal name" oninput="this.value = this.value.replace(/[^A-Za-z0-9\s]/g, '')" required>
-                    <input type="number" th:field="*{makingTime}" th:value="${makingTime != null ? makingTime : ''}" class="field-main fld-time" placeholder="Making time" min="1" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
-                    <p class="text-min">min</p>
-                    <input type="number" th:field="*{portions}" th:value="${portions != null ? portions : ''}" class="field-main fld-portion" placeholder="Serving size" min="1" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
-                    <p class="text-portions">x&nbsp;&nbsp;portions</p>
+            </div>
 
 
-                </div>
+            <div>
+                <form action="#" th:action="@{/meals/save}" th:object="${meal}" method="POST">
+                    <!-- Meal fields -->
+                    <div class="middle-row-add-div">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="text" th:field="*{mealName}" class="field-main fld-meal" placeholder="Meal name" oninput="this.value = this.value.replace(/[^A-Za-z0-9\s]/g, '')" required>
+                        <input type="number" th:field="*{makingTime}" th:value="${makingTime != null ? makingTime : ''}" class="field-main fld-time" placeholder="Making time" min="1" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
+                        <p class="text-min">min</p>
+                        <input type="number" th:field="*{portions}" th:value="${portions != null ? portions : ''}" class="field-main fld-portion" placeholder="Serving size" min="1" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
+                        <p class="text-portions">x&nbsp;&nbsp;portions</p>
 
-                <div class="middle-add-div">
-                    <!-- Category selection -->
-                    <div class="middle-cat-div">
-                        <div class="category-buttons">
-                            <p class="plain-text">Category:</p>
-                            <div class="button-group">
-                                <input type="radio" id="breakfast" name="categoryId" value="1" th:checked="${meal.category != null and meal.category.id == 1}">
-                                <label for="breakfast" class="button-label">Breakfast</label>
 
-                                <input type="radio" id="lunch" name="categoryId" value="2" th:checked="${meal.category != null and meal.category.id == 2}">
-                                <label for="lunch" class="button-label">Lunch</label>
+                    </div>
 
-                                <input type="radio" id="dinner" name="categoryId" value="3" th:checked="${meal.category != null and meal.category.id == 3}">
-                                <label for="dinner" class="button-label">Dinner</label>
+                    <div class="middle-add-div">
+                        <!-- Category selection -->
+                        <div class="middle-cat-div">
+                            <div class="category-buttons">
+                                <p class="plain-text">Category:</p>
+                                <div class="button-group">
+                                    <input type="radio" id="breakfast" name="categoryId" value="1" th:checked="${meal.category != null and meal.category.id == 1}">
+                                    <label for="breakfast" class="button-label">Breakfast</label>
 
-                                <input type="radio" id="snack" name="categoryId" value="4" th:checked="${meal.category != null and meal.category.id == 4}">
-                                <label for="snack" class="button-label">Snack</label>
+                                    <input type="radio" id="lunch" name="categoryId" value="2" th:checked="${meal.category != null and meal.category.id == 2}">
+                                    <label for="lunch" class="button-label">Lunch</label>
+
+                                    <input type="radio" id="dinner" name="categoryId" value="3" th:checked="${meal.category != null and meal.category.id == 3}">
+                                    <label for="dinner" class="button-label">Dinner</label>
+
+                                    <input type="radio" id="snack" name="categoryId" value="4" th:checked="${meal.category != null and meal.category.id == 4}">
+                                    <label for="snack" class="button-label">Snack</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <p class="plain-text">Ingredients:</p>
+
+                        <!-- Ingredients section -->
+                        <div  class="field-main fld-ingredients" id="ingredientsList">
+
+                            <!-- This will be populated dynamically with JavaScript -->
+                        </div>
+
+                        <div style="display: none;">
+                            <div th:each="ingredient : ${meal.ingredients}"
+                                 th:data-ingredient="${ingredient.ingredient}"
+                                 th:data-quantity="${ingredient.quantity}"
+                                 th:data-measure-id="${ingredient.measure.id}"
+                                 th:data-measure-text="${ingredient.measure.measure}">
                             </div>
                         </div>
 
-                    </div>
-                    <p class="plain-text">Ingredients:</p>
-
-                    <!-- Ingredients section -->
-                    <div  class="field-main fld-ingredients" id="ingredientsList">
-
-                        <!-- This will be populated dynamically with JavaScript -->
-                    </div>
-
-                    <div style="display: none;">
-                        <div th:each="ingredient : ${meal.ingredients}"
-                             th:data-ingredient="${ingredient.ingredient}"
-                             th:data-quantity="${ingredient.quantity}"
-                             th:data-measure-id="${ingredient.measure.id}"
-                             th:data-measure-text="${ingredient.measure.measure}">
+                        <div class="middle-ingr-div">
+                            <input class="field-main fld-ingredient" type="text" id="ingredientName" placeholder="Ingredient name">
+                            <input type="number" class="field-main fld-quantity " id="ingredientQuantity" placeholder="Quantity" step="0.01" >
+                            <select id="ingredientMeasure" class="button-main btn-measure">
+                                <option th:each="measure : ${measures}" th:value="${measure.id}" th:text="${measure.measure}"></option>
+                            </select>
+                            <button class="button-main btn-right" type="button" onclick="addIngredient()">Add</button>
                         </div>
+
                     </div>
 
-                    <div class="middle-ingr-div">
-                        <input class="field-main fld-ingredient" type="text" id="ingredientName" placeholder="Ingredient name">
-                        <input type="number" class="field-main fld-quantity " id="ingredientQuantity" placeholder="Quantity" step="0.01" >
-                        <select id="ingredientMeasure" class="button-main btn-measure">
-                            <option th:each="measure : ${measures}" th:value="${measure.id}" th:text="${measure.measure}"></option>
-                        </select>
-                        <button class="button-main btn-right" type="button" onclick="addIngredient()">Add</button>
+
+
+                    <!-- Recipe textarea -->
+                    <div class="bottom-div-recipe">
+                        <textarea th:field="*{mealDescription.description}" class="field-main fld-recipe" placeholder="Enter your recipe here..." rows="5"></textarea>
                     </div>
 
-                </div>
+                    <!-- Form buttons -->
+                    <div class="bottom-div">
+                        <button type="submit" class="button-main btn-right btn-submit">Save</button>
+                        <button type="button" class="button-main btn-cancel btn-submit">Cancel</button>
+                    </div>
+                </form>
 
+            </div>
 
-
-                <!-- Recipe textarea -->
-                <div class="bottom-div-recipe">
-                    <textarea th:field="*{mealDescription.description}" class="field-main fld-recipe" placeholder="Enter your recipe here..." rows="5"></textarea>
-                </div>
-
-                <!-- Form buttons -->
-                <div class="bottom-div">
-                    <button type="submit" class="button-main btn-right btn-submit">Save</button>
-                    <button type="button" class="button-main btn-cancel btn-submit">Cancel</button>
-                </div>
-            </form>
 
 
         </div>
-
-
-
-    </div>
     </div>
 </div>
 <script th:src="@{/js/meal-form.js}"></script>
