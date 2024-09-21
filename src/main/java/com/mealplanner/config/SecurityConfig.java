@@ -17,10 +17,10 @@ public class SecurityConfig {
         JdbcUserDetailsManager theUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
         theUserDetailsManager
-                .setUsersByUsernameQuery("SELECT id, username, password, enabled FROM userdata WHERE id=?");
+                .setUsersByUsernameQuery("SELECT username, password, enabled FROM userdata WHERE username=?");
 
         theUserDetailsManager
-                .setAuthoritiesByUsernameQuery("SELECT user_id, role FROM roles where user_id=?");
+                .setAuthoritiesByUsernameQuery("SELECT username, role FROM roles where username=?");
 
         return theUserDetailsManager;
     }
@@ -30,13 +30,13 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        .requestMatchers("/").hasRole("ROLE_USER")
+                        .requestMatchers("/").hasRole("USER")
                         .anyRequest().authenticated()
         )
         .formLogin(form ->
                 form
-                        .loginPage("")
-                        .loginProcessingUrl("").loginProcessingUrl("/authenticate-user")
+                        .loginPage("/login-page")
+                        .loginProcessingUrl("/authenticate-user")
                         .permitAll()
         )
                 .logout(logout -> logout.permitAll())
