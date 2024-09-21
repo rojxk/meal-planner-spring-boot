@@ -12,12 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
-@RequestMapping("/meals")
+@RequestMapping("/{username}/meals")
 public class MealController {
 
     private static final Logger logger = LoggerFactory.getLogger(MealController.class);
@@ -39,7 +40,12 @@ public class MealController {
 
 
     @GetMapping("/list")
-    public String list(Model theModel){
+    public String list(@PathVariable String username, Model theModel, Principal principal){
+        if (!username.equals(principal.getName())) {
+            return "redirect:/access-denied";
+        }
+
+        theModel.addAttribute("username", username);
         List<Meal> theMeals = mealService.findAllMealsWithCategory();
         theModel.addAttribute("meals", theMeals);
         return "meals/main-meal-planner";
