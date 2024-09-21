@@ -1,16 +1,27 @@
 package com.mealplanner.config;
 
+import com.mealplanner.security.CustomAuthenticationSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 
 import javax.sql.DataSource;
+import java.util.function.Supplier;
 
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
@@ -37,6 +48,7 @@ public class SecurityConfig {
                 form
                         .loginPage("/login-page")
                         .loginProcessingUrl("/authenticate-user")
+                        .successHandler(authenticationSuccessHandler)
                         .permitAll()
         )
                 .logout(logout -> logout.permitAll())
@@ -45,6 +57,13 @@ public class SecurityConfig {
                 );
 
         return http.build();
+    }
+
+    private AuthorizationDecision hasUsername(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
+        String username = context.getVariables().get("username");
+        return new AuthorizationDecision(
+                username != null && username.equals(authentication.get().getName())
+        );
     }
 
 }
