@@ -18,8 +18,8 @@
     <div class="square-div">
 
         <div class="top-row-div">
-                <a href="/${userdata.username}/meals/add-meal" class="button-main btn-back">+&nbsp;&nbsp;&nbsp; New Meal</a>
-                <a href="/${userdata.username}/meals/list" class="button-main btn-right">Log out</a>
+            <a th:href="@{/{username}/meals/add-meal(username=${username})}" class="button-main btn-back">+&nbsp;&nbsp;&nbsp; New Meal</a>
+            <a th:href="@{/{username}/meals/list(username=${username})}" class="button-main btn-right">Log out</a>
         </div>
 
 
@@ -32,7 +32,7 @@
         </div>
         <div class="middle-div">
             <div class="cards-container" th:if="${not #lists.isEmpty(meals)}">
-                <a th:href="@{/${userdata.username}/meals/show-meal(mealId=${tempMeal.id})}" class="card" th:each="tempMeal : ${meals}">
+                <a th:href="@{/{username}/meals/show-meal(mealId=${tempMeal.id}, username=${username})}" class="card" th:each="tempMeal : ${meals}">
                     <input type="hidden" name="mealId" th:value="${tempMeal.id}" />
                     <div class="card-content">
                         <div class="card-title">

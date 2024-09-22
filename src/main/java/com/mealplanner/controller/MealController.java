@@ -47,7 +47,7 @@ public class MealController {
         Userdata userdata = userdataService.findUserdataByUsername(username);
         List<Meal> theMeals = mealService.findAllWithCategoryByUserId(userdata.getId());
         theModel.addAttribute("meals", theMeals);
-        theModel.addAttribute("userdata", userdata);
+        theModel.addAttribute("username", username);
         return "meals/main-meal-planner";
     }
 
@@ -126,6 +126,7 @@ public class MealController {
     public String showMeal(@PathVariable String username,
                            @RequestParam("mealId") Integer mealId, Model theModel) {
         Meal meal = mealService.findMealWithAllInfoById(mealId);
+        theModel.addAttribute("username", username);
         if (meal != null) {
             theModel.addAttribute("meal", meal);
             return "meals/show-meal";

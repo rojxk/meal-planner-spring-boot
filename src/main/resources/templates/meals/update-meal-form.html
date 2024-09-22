@@ -18,9 +18,8 @@
         <div class="square-div">
 
             <div class="top-row-div">
-                <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
-                <p class="top-meal-planner">Meal Planner</p>
-                <a th:href="@{/meals/list}" class="button-main btn-right">Log out</a>
+                <a th:href="@{/{username}/meals/add-meal(username=${username})}" class="button-main btn-back">+&nbsp;&nbsp;&nbsp; New Meal</a>
+                <a th:href="@{/{username}/meals/list(username=${username})}" class="button-main btn-right">Log out</a>
             </div>
 
             <div class="top-middle-add-div">
@@ -30,7 +29,7 @@
 
 
             <div>
-                <form action="#" th:action="@{/meals/save}" th:object="${meal}" method="POST">
+                <form action="#" th:action="@{/{username}/meals/save(username=${username})}" th:object="${meal}" method="POST">
                     <!-- Meal fields -->
                     <div class="middle-row-add-div">
                         <input type="hidden" th:field="*{id}">

@@ -15,9 +15,9 @@
     <div class="background-div">
         <div class="square-div">
             <div class="top-row-div">
-                <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
+                <a th:href="@{/{username}/meals/list(username=${username})}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
                 <p class="top-meal-planner">Meal Planner</p>
-                <a th:href="@{/meals/list}" class="button-main btn-right">Log out</a>
+                <a th:href="@{/{username}/meals/list(username=${username})}" class="button-main btn-right">Log out</a>
             </div>
 
             <div class="top-middle-add-div">
@@ -31,12 +31,12 @@
             <p th:text="${meal.mealDescription}"></p>
 
             <div class="bottom-div">
-                <a th:href="@{/meals/delete(mealId=${meal.id})}"
+                <a th:href="@{/{username}/meals/delete(mealId=${meal.id}, username=${username})}"
                    class="button-main btn-cancel"
                    onclick="if (!(confirm('Are you sure you want to delete this meal?'))) return false">
                     Delete
                 </a>
-                <a th:href="@{/meals/update-meal(mealId=${meal.id})}" class="button-main btn-right">Update</a>
+                <a th:href="@{/{username}/meals/update-meal(mealId=${meal.id}, username=${username})}" class="button-main btn-right">Update</a>
             </div>
         </div>
     </div>

@@ -30,6 +30,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #B1C5EC;
     justify-content: flex-start;
+    max-height: 200px;
 }
 
 .card:hover {
