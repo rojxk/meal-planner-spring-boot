@@ -1,10 +1,7 @@
 package com.mealplanner.controller;
 
 import com.mealplanner.entity.*;
-import com.mealplanner.service.CategoryService;
-import com.mealplanner.service.IngredientService;
-import com.mealplanner.service.MealService;
-import com.mealplanner.service.MeasureService;
+import com.mealplanner.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -30,12 +27,15 @@ public class MealController {
 
     private IngredientService ingredientService;
 
+    private UserdataService userdataService;
+
     @Autowired
-    public MealController(MealService mealService, CategoryService categoryService, MeasureService measureService, IngredientService ingredientService){
+    public MealController(MealService mealService, CategoryService categoryService, MeasureService measureService, IngredientService ingredientService, UserdataService userdataService){
         this.mealService = mealService;
         this.categoryService = categoryService;
         this.measureService = measureService;
         this.ingredientService = ingredientService;
+        this.userdataService = userdataService;
     }
 
 
@@ -44,6 +44,8 @@ public class MealController {
         if (!username.equals(principal.getName())) {
             return "redirect:/access-denied";
         }
+
+        Userdata userdata = userdataService.findUserdataByUsername(username);
 
         theModel.addAttribute("username", username);
         List<Meal> theMeals = mealService.findAllMealsWithCategory();
