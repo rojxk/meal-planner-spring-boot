@@ -20,7 +20,9 @@
             <div class="top-row-div">
                 <a th:href="@{/${username}/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
                 <p class="top-meal-planner">Meal Planner</p>
-                <a th:href="@{/${username}/meals/list}" class="button-main btn-right">Log out</a>
+                <form action="#" th:action="@{/logout}" method="POST">
+                    <input class="button-main btn-right" type="submit" value="Log out"/>
+                </form>
             </div>
 
             <div class="top-middle-add-div">
