@@ -1,5 +1,6 @@
 package com.mealplanner.controller;
 
+import com.mealplanner.annotation.CheckUsername;
 import com.mealplanner.entity.*;
 import com.mealplanner.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,38 +41,39 @@ public class MealController {
 
 
     @GetMapping("/list")
-    public String list(@PathVariable String username, Model theModel, Principal principal){
-        if (!username.equals(principal.getName())) {
-            return "redirect:/access-denied";
-        }
+    @CheckUsername
+    public String list(@PathVariable String username, Model theModel){
 
         Userdata userdata = userdataService.findUserdataByUsername(username);
-
-        theModel.addAttribute("username", username);
-        List<Meal> theMeals = mealService.findAllMealsWithCategory();
+        List<Meal> theMeals = mealService.findAllWithCategoryByUserId(userdata.getId());
         theModel.addAttribute("meals", theMeals);
+        theModel.addAttribute("userdata", userdata);
         return "meals/main-meal-planner";
     }
 
     @GetMapping("/add-meal")
-    public String addMeal(Model theModel) {
-        return prepareModelForMealForm(new Meal(), theModel);
+    @CheckUsername
+    public String addMeal(@PathVariable String username, Model theModel) {
+
+        return prepareModelForMealForm(new Meal(), theModel, username);
     }
 
     @GetMapping("/update-meal")
-    public String updateMeal(@RequestParam("mealId") Integer mealId, Model theModel){
+    @CheckUsername
+    public String updateMeal(@PathVariable String username, @RequestParam("mealId") Integer mealId, Model theModel){
         Meal meal = mealService.findMealWithAllInfoById(mealId);
-        return prepareModelForMealForm(meal, theModel);
+        return prepareModelForMealForm(meal, theModel, username);
 
     }
 
-    private String prepareModelForMealForm(Meal meal, Model theModel) {
+    private String prepareModelForMealForm(Meal meal, Model theModel, String username) {
         if (meal.getMealDescription() == null) {
             meal.setMealDescription(new MealDescription());
         }
         theModel.addAttribute("meal", meal);
         theModel.addAttribute("categories", categoryService.findAll());
         theModel.addAttribute("measures", measureService.findAll());
+        theModel.addAttribute("username", username);
         if (meal.getId() == null){
             return "meals/add-meal-form";
         } else {
@@ -80,14 +82,23 @@ public class MealController {
     }
 
     @PostMapping("/save")
-    public String saveMeal(@ModelAttribute Meal meal,
+    @CheckUsername
+    public String saveMeal(@PathVariable String username,
+                           @ModelAttribute Meal meal,
                            @RequestParam(value = "categoryId", required = false) String categoryId) {
-        processMeal(meal, categoryId);
+        processMeal(meal, categoryId, username);
         mealService.save(meal);
-        return "redirect:/meals/list";
+        return "redirect:/" + username + "/meals/list";
     }
 
-    private void processMeal(Meal meal, String categoryId) {
+    private void processMeal(Meal meal, String categoryId, String username) {
+
+        if(username != null){
+            Userdata userdata = userdataService.findUserdataByUsername(username);
+            meal.setUserdata(userdata);
+
+        }
+
         if (categoryId != null) {
             Category category = categoryService.findById(Integer.parseInt(categoryId));
             meal.setCategory(category);
@@ -111,20 +122,24 @@ public class MealController {
     }
 
     @GetMapping("/show-meal")
-    public String showMeal(@RequestParam("mealId") Integer mealId, Model theModel) {
+    @CheckUsername
+    public String showMeal(@PathVariable String username,
+                           @RequestParam("mealId") Integer mealId, Model theModel) {
         Meal meal = mealService.findMealWithAllInfoById(mealId);
         if (meal != null) {
             theModel.addAttribute("meal", meal);
             return "meals/show-meal";
         } else {
-            return "redirect:/meals/list";
+            return "redirect:/" + username + "/meals/list";
         }
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("mealId") int theId){
+    @CheckUsername
+    public String delete(@PathVariable String username,
+                         @RequestParam("mealId") int theId){
         mealService.deleteById(theId);
-        return "redirect:/meals/list";
+        return "redirect:/" + username + "/meals/list";
     }
 
     @InitBinder

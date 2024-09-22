@@ -18,6 +18,8 @@ public interface MealService {
 
     Meal update(Meal meal);
 
+    List<Meal> findAllWithCategoryByUserId(Integer id);
+
 
 
 }

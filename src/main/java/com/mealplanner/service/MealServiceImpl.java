@@ -102,4 +102,9 @@ public class MealServiceImpl implements MealService{
         return meal;
     }
 
+    @Override
+    public List<Meal> findAllWithCategoryByUserId(Integer id) {
+        return mealRepository.findAllWithCategoryByUserId(id);
+    }
+
 }

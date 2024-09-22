@@ -2,6 +2,7 @@ package com.mealplanner.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -55,11 +56,19 @@ public class Userdata {
     }
 
     public List<Meal> getMeals() {
+        if (meals == null){
+            meals = new ArrayList<>();
+        }
         return meals;
     }
 
     public void setMeals(List<Meal> meals) {
         this.meals = meals;
+    }
+
+    public void addMeal(Meal meal){
+        getMeals().add(meal);
+        meal.setUserdata(this);
     }
 
     @Override
