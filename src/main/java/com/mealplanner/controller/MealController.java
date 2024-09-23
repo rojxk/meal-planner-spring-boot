@@ -1,10 +1,7 @@
 package com.mealplanner.controller;
 
 import com.mealplanner.entity.*;
-import com.mealplanner.service.CategoryService;
-import com.mealplanner.service.IngredientService;
-import com.mealplanner.service.MealService;
-import com.mealplanner.service.MeasureService;
+import com.mealplanner.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
-@RequestMapping("/meals")
 public class MealController {
 
     private static final Logger logger = LoggerFactory.getLogger(MealController.class);
@@ -28,39 +24,50 @@ public class MealController {
     private MeasureService measureService;
 
     private IngredientService ingredientService;
+    private UserdataService userdataService;
 
     @Autowired
-    public MealController(MealService mealService, CategoryService categoryService, MeasureService measureService, IngredientService ingredientService) {
+    public MealController(MealService mealService,
+                          CategoryService categoryService,
+                          MeasureService measureService,
+                          IngredientService ingredientService,
+                          UserdataService userdataService) {
         this.mealService = mealService;
         this.categoryService = categoryService;
         this.measureService = measureService;
         this.ingredientService = ingredientService;
+        this.userdataService = userdataService;
     }
 
 
-    @GetMapping("/list")
-    public String list(Model theModel) {
+    @GetMapping("{username}/meals/list")
+    public String list(Model theModel,
+                       @PathVariable("username") String username) {
         List<Meal> theMeals = mealService.findAllMealsWithCategory();
         theModel.addAttribute("meals", theMeals);
         return "meals/main-meal-planner";
     }
 
-    @GetMapping("/add-meal")
-    public String addMeal(Model theModel) {
-        return prepareModelForMealForm(new Meal(), theModel);
+    @GetMapping("{username}/meals/add-meal")
+    public String addMeal(Model theModel,
+                          @PathVariable("username") String username) {
+        return prepareModelForMealForm(new Meal(), theModel, username);
     }
 
-    @GetMapping("/update-meal")
-    public String updateMeal(@RequestParam("mealId") Integer mealId, Model theModel) {
+    @GetMapping("{username}/meals/update-meal")
+    public String updateMeal(@RequestParam("mealId") Integer mealId,
+                             @PathVariable("username") String username,
+                             Model theModel) {
         Meal meal = mealService.findMealWithAllInfoById(mealId);
-        return prepareModelForMealForm(meal, theModel);
+        return prepareModelForMealForm(meal, theModel, username);
 
     }
 
-    private String prepareModelForMealForm(Meal meal, Model theModel) {
+    private String prepareModelForMealForm(Meal meal, Model theModel, String username) {
         if (meal.getMealDescription() == null) {
             meal.setMealDescription(new MealDescription());
         }
+        theModel.addAttribute("username", username);
         theModel.addAttribute("meal", meal);
         theModel.addAttribute("categories", categoryService.findAll());
         theModel.addAttribute("measures", measureService.findAll());
@@ -71,12 +78,13 @@ public class MealController {
         }
     }
 
-    @PostMapping("/save")
+    @PostMapping("/{username}/meals/save")
     public String saveMeal(@ModelAttribute Meal meal,
+                           @PathVariable("username") String username,
                            @RequestParam(value = "categoryId", required = false) String categoryId) {
         processMeal(meal, categoryId);
         mealService.save(meal);
-        return "redirect:/meals/list";
+        return "redirect:/" + username +"/meals/list";
     }
 
     private void processMeal(Meal meal, String categoryId) {
@@ -102,21 +110,25 @@ public class MealController {
         }
     }
 
-    @GetMapping("/show-meal")
-    public String showMeal(@RequestParam("mealId") Integer mealId, Model theModel) {
+    @GetMapping("{username}/meals/show-meal")
+    public String showMeal(@RequestParam("mealId") Integer mealId,
+                           @PathVariable("username") String username,
+                           Model theModel) {
         Meal meal = mealService.findMealWithAllInfoById(mealId);
         if (meal != null) {
             theModel.addAttribute("meal", meal);
+            theModel.addAttribute("username", username);
             return "meals/show-meal";
         } else {
-            return "redirect:/meals/list";
+            return "redirect:/" + username +"/meals/list";
         }
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam("mealId") int theId) {
+    @GetMapping("{username}/meals/delete")
+    public String delete(@RequestParam("mealId") int theId,
+                         @PathVariable("username") String username) {
         mealService.deleteById(theId);
-        return "redirect:/meals/list";
+        return "redirect:/" + username +"/meals/list";
     }
 
     @InitBinder

@@ -15,9 +15,9 @@
     <div class="background-div">
         <div class="square-div">
             <div class="top-row-div">
-                <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
+                <a th:href="@{'/' + ${username} '/meals/list'}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
                 <p class="top-meal-planner">Meal Planner</p>
-                <a th:href="@{/meals/list}" class="button-main btn-right">Log out</a>
+                <a th:href="@{/logout}" class="button-main btn-right">Log out</a>
             </div>
 
             <div class="top-middle-add-div">
