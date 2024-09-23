@@ -18,7 +18,7 @@
     <div class="square-div">
 
         <div class="top-row-div">
-            <a th:href="@{/{username}/meals/add-meal(username=${username})}" class="button-main btn-back">+&nbsp;&nbsp;&nbsp; New Meal</a>
+            <a th:href="@{'/'+ ${username}+ '/meals/add-meal'}" class="button-main btn-back">+&nbsp;&nbsp;&nbsp; New Meal</a>
             <form action="#" th:action="@{/logout}" method="POST">
                 <input class="button-main btn-right" type="submit" value="Log out"/>
             </form>
@@ -26,7 +26,7 @@
 
 
         <div class="top-middle-div">
-            <p class="fancy-text">Meal planner</p>
+            <p class="distinctive-text">Meal planner</p>
         </div>
 
         <div class="middle-row-div">
@@ -34,7 +34,7 @@
         </div>
         <div class="middle-div">
             <div class="cards-container" th:if="${not #lists.isEmpty(meals)}">
-                <a th:href="@{/{username}/meals/show-meal(mealId=${tempMeal.id}, username=${username})}" class="card" th:each="tempMeal : ${meals}">
+                <a th:href="@{'/' + ${username} + '/meals/show-meal'(mealId=${tempMeal.id}) }" class="card" th:each="tempMeal : ${meals}">
                     <input type="hidden" name="mealId" th:value="${tempMeal.id}" />
                     <div class="card-content">
                         <div class="card-title">

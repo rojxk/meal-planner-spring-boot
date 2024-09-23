@@ -31,7 +31,6 @@ function addIngredient() {
     const measureSelect = document.getElementById('ingredientMeasure');
     const measureId = measureSelect.value;
     const measureText = measureSelect.options[measureSelect.selectedIndex].text;
-
     if (ingredient && quantity && measureId) {
         ingredients.push({ ingredient, quantity, measureId, measureText });
         updateIngredientsList();
@@ -84,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (oldIngredientsDiv) {
             oldIngredientsDiv.remove();
         }
-
         ingredients.forEach((ing, index) => {
             const ingredientInput = document.createElement('input');
             ingredientInput.type = 'hidden';
@@ -103,8 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
             measureInput.name = `ingredients[${index}].measure.id`;
             measureInput.value = ing.measureId;
             this.appendChild(measureInput);
+
+
         });
 
         this.submit();
+
     });
+
 });
+

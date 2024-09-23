@@ -104,66 +104,26 @@
 }
 
 
-
-.button-left-back {
-    height: 50px;
-    width: 200px;
-    font-size: 20px;
-    background-color: gray;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 5px;
-    display: flex; /* Enables Flexbox for centering */
-    justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Centers content vertically */
-    text-align: center; /* Ensures text stays centered if it wraps */
-    color: white; /* Text color */
-    text-decoration: none; /* Removes underline */
-    cursor: pointer; /* Hand cursor on hover */
-    padding: 0; /* Removes padding to avoid alignment issues */
-    margin: 0; /* Removes margin to avoid alignment issues */
-    line-height: normal; /* Ensures line height doesn't push text off center */
-    box-sizing: border-box; /* Ensures padding and border are included in width/height */
+.btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
-
-
-.button-right {
-    height: 50px;
-    width: 120px;
-    background-color: gray;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 5px;
-    text-align: center;
-    vertical-align: middle;
+.btn-delete {
+    background-color: #ff4d4d;
+    color: white;
 }
-
-
-
-.button-submit {
-    height: 50px;
-    background-color: gray;
-    font-size: 20px;
-    position: absolute;
-    padding: 0;
-    border-radius: 5px;
-    border-width: 0;
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make it behave like a button */
-    color: white; /* Text color */
-    cursor: pointer; /* Hand cursor on hover */
+.btn-delete:hover {
+    background-color: #ff3333;
 }
-
-.button-submit1 {
-    left:0;
-    top:0;
+.btn-cancel {
+    background-color: #f0f0f0;
+    color: #333;
 }
-
-.button-submit2 {
-    left: 300px;
-}
-.button-submit3 {
-    left: 600px
+.btn-cancel:hover {
+    background-color: #e0e0e0;
 }
