@@ -28,6 +28,21 @@
     width: 120px;
 }
 
+.btn-login {
+    position: absolute !important;
+    background-color: #344EA3 !important;
+    right: 0 !important;
+    color: #FFF6EB !important;
+    height: 50px;
+    border-color: #344EA3 !important;
+    font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+.btn-login:hover{
+    background-color: #1A2788 !important;
+}
+
 .btn-category {
     right: 0;
     width: fit-content;

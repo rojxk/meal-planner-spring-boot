@@ -144,6 +144,16 @@ a {
     width: 100%;
 }
 
+/* for login
+ */
+.middle-login-div {
+    position: absolute;
+    top: 220px;
+    left: 250px;
+    width: 50%;
+    height: calc(100svh - 270px);
+}
+
 /* for add - ingredients
  */
 .middle-ingr-div {
