@@ -30,10 +30,20 @@
         </div>
 
         <div class="middle-row-div">
-
+            <select id="sortSelect" onchange="sortMeals()">
+                <option value="" disabled selected>Sort by</option>
+                <option value="">The oldest</option>
+                <option value="">The newest</option>
+                <option value="name">Name A-Z</option>
+                <option value="name">Name Z-A</option>
+                <option value="category">Category</option>
+                <option value="makingTime">Making Time</option>
+                <option value="portions">Portions</option>
+            </select>
         </div>
+
         <div class="middle-div">
-            <div class="cards-container" th:if="${not #lists.isEmpty(meals)}">
+            <div id="mealsContainer" class="cards-container" th:if="${not #lists.isEmpty(meals)}">
                 <a th:href="@{'/' + ${username} + '/meals/show-meal'(mealId=${tempMeal.id}) }" class="card" th:each="tempMeal : ${meals}">
                     <input type="hidden" name="mealId" th:value="${tempMeal.id}" />
                     <div class="card-content">
