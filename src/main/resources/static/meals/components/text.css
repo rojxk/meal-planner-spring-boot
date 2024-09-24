@@ -32,6 +32,14 @@
     font-family: 'Koulen', serif;
     font-size: 35px;
     margin-bottom: 5px;
+    margin-top: 5px;
     color: #330300;
 
+}
+
+.text-modal {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }

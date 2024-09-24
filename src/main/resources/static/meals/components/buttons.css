@@ -15,6 +15,7 @@
     border: none;
     outline: none;
     font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
 
 }
 
@@ -106,16 +107,17 @@
 
 .btn {
     padding: 10px 20px;
-    margin: 0 10px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    font-weight: bold;
     transition: background-color 0.3s;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
 }
 .btn-delete {
     background-color: #ff4d4d;
     color: white;
+    margin: 0 0 0 10px;
 }
 .btn-delete:hover {
     background-color: #ff3333;
@@ -123,6 +125,7 @@
 .btn-cancel {
     background-color: #f0f0f0;
     color: #333;
+    margin: 0 10px 0 0;
 }
 .btn-cancel:hover {
     background-color: #e0e0e0;

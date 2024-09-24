@@ -1,5 +1,6 @@
 package com.mealplanner.controller;
 
+import com.mealplanner.annotation.CheckUsername;
 import com.mealplanner.entity.*;
 import com.mealplanner.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,20 +42,25 @@ public class MealController {
 
 
     @GetMapping("{username}/meals/list")
+    @CheckUsername
     public String list(Model theModel,
                        @PathVariable("username") String username) {
-        List<Meal> theMeals = mealService.findAllMealsWithCategory();
+        Integer userId = userdataService.findUserdataByUsername(username).getId();
+        List<Meal> theMeals = mealService.findAllWithCategoryByUserId(userId);
         theModel.addAttribute("meals", theMeals);
+        theModel.addAttribute("username", username);
         return "meals/main-meal-planner";
     }
 
     @GetMapping("{username}/meals/add-meal")
+    @CheckUsername
     public String addMeal(Model theModel,
                           @PathVariable("username") String username) {
         return prepareModelForMealForm(new Meal(), theModel, username);
     }
 
     @GetMapping("{username}/meals/update-meal")
+    @CheckUsername
     public String updateMeal(@RequestParam("mealId") Integer mealId,
                              @PathVariable("username") String username,
                              Model theModel) {
@@ -79,15 +85,21 @@ public class MealController {
     }
 
     @PostMapping("/{username}/meals/save")
+    @CheckUsername
     public String saveMeal(@ModelAttribute Meal meal,
                            @PathVariable("username") String username,
                            @RequestParam(value = "categoryId", required = false) String categoryId) {
-        processMeal(meal, categoryId);
+        processMeal(meal, categoryId, username);
         mealService.save(meal);
         return "redirect:/" + username +"/meals/list";
     }
 
-    private void processMeal(Meal meal, String categoryId) {
+    private void processMeal(Meal meal, String categoryId, String username) {
+
+        if (username != null){
+            meal.setUserdata(userdataService.findUserdataByUsername(username));
+        }
+
         if (categoryId != null) {
             Category category = categoryService.findById(Integer.parseInt(categoryId));
             meal.setCategory(category);
@@ -111,6 +123,7 @@ public class MealController {
     }
 
     @GetMapping("{username}/meals/show-meal")
+    @CheckUsername
     public String showMeal(@RequestParam("mealId") Integer mealId,
                            @PathVariable("username") String username,
                            Model theModel) {
@@ -125,6 +138,7 @@ public class MealController {
     }
 
     @GetMapping("{username}/meals/delete")
+    @CheckUsername
     public String delete(@RequestParam("mealId") int theId,
                          @PathVariable("username") String username) {
         mealService.deleteById(theId);
