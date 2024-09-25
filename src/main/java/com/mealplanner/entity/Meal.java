@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "meal")
-public class Meal {
+public class Meal{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +51,7 @@ public class Meal {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
+
 
     public Meal(){
 
@@ -161,4 +162,6 @@ public class Meal {
                 ", portions=" + portions +
                 '}';
     }
+
+
 }

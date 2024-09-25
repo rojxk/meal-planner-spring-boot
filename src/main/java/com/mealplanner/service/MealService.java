@@ -20,6 +20,8 @@ public interface MealService {
 
     List<Meal> findAllWithCategoryByUserId(Integer id);
 
+    List<Meal> sortedMeals(Integer userId, String sortBy);
+
 
 
 }

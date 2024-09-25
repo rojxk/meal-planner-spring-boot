@@ -41,25 +41,26 @@ public class MealController {
     }
 
 
-    @GetMapping("{username}/meals/list")
+    @GetMapping("/{username}/meals/list")
     @CheckUsername
     public String list(Model theModel,
                        @PathVariable("username") String username) {
         Integer userId = userdataService.findUserdataByUsername(username).getId();
-        List<Meal> theMeals = mealService.findAllWithCategoryByUserId(userId);
+        //List<Meal> theMeals = mealService.findAllWithCategoryByUserId(userId);
+        List<Meal> theMeals = mealService.sortedMeals(userId,"category");
         theModel.addAttribute("meals", theMeals);
         theModel.addAttribute("username", username);
         return "meals/main-meal-planner";
     }
 
-    @GetMapping("{username}/meals/add-meal")
+    @GetMapping("/{username}/meals/add-meal")
     @CheckUsername
     public String addMeal(Model theModel,
                           @PathVariable("username") String username) {
         return prepareModelForMealForm(new Meal(), theModel, username);
     }
 
-    @GetMapping("{username}/meals/update-meal")
+    @GetMapping("/{username}/meals/update-meal")
     @CheckUsername
     public String updateMeal(@RequestParam("mealId") Integer mealId,
                              @PathVariable("username") String username,
@@ -122,7 +123,7 @@ public class MealController {
         }
     }
 
-    @GetMapping("{username}/meals/show-meal")
+    @GetMapping("/{username}/meals/show-meal")
     @CheckUsername
     public String showMeal(@RequestParam("mealId") Integer mealId,
                            @PathVariable("username") String username,
@@ -137,12 +138,25 @@ public class MealController {
         }
     }
 
-    @GetMapping("{username}/meals/delete")
+    @GetMapping("/{username}/meals/delete")
     @CheckUsername
     public String delete(@RequestParam("mealId") int theId,
                          @PathVariable("username") String username) {
         mealService.deleteById(theId);
         return "redirect:/" + username +"/meals/list";
+    }
+
+    @GetMapping("/{username}/meals/sort")
+    @CheckUsername
+    public String sortBy(@RequestParam(name = "sortBy", required = false) String sortBy,
+                        @PathVariable("username") String username,
+                         Model theModel){
+        Integer userId = userdataService.findUserdataByUsername(username).getId();
+        List<Meal> theMeals = mealService.sortedMeals(userId,sortBy);
+        theModel.addAttribute("meals", theMeals);
+        theModel.addAttribute("username", username);
+        return "meals/main-meal-planner";
+
     }
 
     @InitBinder

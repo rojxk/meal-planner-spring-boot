@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/meals/components/text.css">
     <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 <body>
@@ -33,11 +34,11 @@
             <select id="sortSelect" onchange="sortMeals()">
                 <option value="" disabled selected>Sort by</option>
                 <option value="">The oldest</option>
-                <option value="">The newest</option>
-                <option value="name">Name A-Z</option>
-                <option value="name">Name Z-A</option>
+                <option value="newest">The newest</option>
+                <option value="name_az">Name A-Z</option>
+                <option value="name_za">Name Z-A</option>
                 <option value="category">Category</option>
-                <option value="makingTime">Making Time</option>
+                <option value="making_time">Making Time</option>
                 <option value="portions">Portions</option>
             </select>
         </div>
@@ -65,6 +66,17 @@
     </div>
     </div>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var username = /*[[${username}]]*/ 'defaultUsername';
 
+    function sortMeals() {
+        const sortBy = document.getElementById('sortSelect').value;
+        if (sortBy) {
+            window.location.href = `/${username}/meals/sort?sortBy=${sortBy}`;
+        }
+    }
+    /*]]>*/
+</script>
 </body>
 </html>

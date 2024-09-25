@@ -4,6 +4,8 @@ import com.mealplanner.dao.IngredientRepository;
 import com.mealplanner.dao.MealRepository;
 import com.mealplanner.entity.Ingredient;
 import com.mealplanner.entity.Meal;
+import com.mealplanner.util.MealComparator;
+import com.mealplanner.util.MealSortCriteria;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -105,6 +107,23 @@ public class MealServiceImpl implements MealService{
     @Override
     public List<Meal> findAllWithCategoryByUserId(Integer id) {
         return mealRepository.findAllWithCategoryByUserId(id);
+    }
+
+    @Override
+    public List<Meal> sortedMeals(Integer userId, String sortBy) {
+        List<Meal> meals = mealRepository.findAllWithCategoryByUserId(userId);
+        MealSortCriteria criteria = switch (sortBy.toLowerCase()) {
+            case "newest" -> MealSortCriteria.NEWEST;
+            case "name_az" -> MealSortCriteria.NAME_AZ;
+            case "name_za" -> MealSortCriteria.NAME_ZA;
+            case "category" -> MealSortCriteria.CATEGORY;
+            case "making_time" -> MealSortCriteria.MAKING_TIME;
+            case "portions" -> MealSortCriteria.PORTIONS;
+            default -> MealSortCriteria.DEFAULT;
+        };
+
+        meals.sort(new MealComparator(criteria));
+        return meals;
     }
 
 }
