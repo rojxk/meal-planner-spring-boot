@@ -1,6 +1,6 @@
 .button-main {
     height: 50px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #344EA3;
     color: #FFF6EB;
     position: absolute;
@@ -25,7 +25,17 @@
 
 .btn-right {
     right: 0;
-    width: 120px;
+    width: 145px;
+}
+
+.btn-sort {
+    right: 20px;
+    width: 125px;
+}
+
+.btn-new {
+    left: 0;
+    width: 165px;
 }
 
 .btn-login {

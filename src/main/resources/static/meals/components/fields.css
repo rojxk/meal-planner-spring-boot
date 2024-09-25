@@ -1,11 +1,20 @@
 .field-main {
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #6495ED;
     position: absolute;
     top: 0;
     color: #FFF6EB;
     cursor: text;
     font-size: 20px;
+}
+
+.fld-search {
+    height: 50px;
+    left: 0;
+    width: calc(100% - 165px);
+    border-width: 0;
+    padding: 0;
+    border-radius: 8px;
 }
 
 .fld-meal {
