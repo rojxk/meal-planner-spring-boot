@@ -33,6 +33,13 @@
     width: 125px;
 }
 
+.btn-search {
+    right: 170px;
+    width: 90px;
+    background-color: #6495ED;
+    border-radius: 0 8px 8px 0;
+}
+
 .btn-new {
     left: 0;
     width: 165px;
