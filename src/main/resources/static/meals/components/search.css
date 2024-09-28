@@ -1,24 +1,26 @@
 form.search-m input[type=text] {
+    box-sizing: border-box;
     font-size: 20px;
     border: 2px solid #6495ED;;
     float: left;
-    width: calc(100% - 270px);
+    width: calc(100% - 275px);
     background: #B1C5EC;
-    height: 50px;
+    height: 46px;
     padding: 0 0 0 23px;
     border-radius: 8px 0 0 8px;
 }
 
 form.search-m button {
     float: left;
-    width: 90px;
-    height: 46px;
+    width: 95px;
+    height: 50px;
     padding: 10px;
     background: #6495ED !important;
     color: white;
     font-size: 20px;
-    border-left: none;
     cursor: pointer;
+    border: none;
+    border-radius: 0 8px 8px 0;
 
 }
 
