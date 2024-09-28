@@ -1,0 +1,34 @@
+form.search-m input[type=text] {
+    font-size: 20px;
+    border: 2px solid #6495ED;;
+    float: left;
+    width: calc(100% - 270px);
+    background: #B1C5EC;
+    height: 50px;
+    padding: 0 0 0 23px;
+    border-radius: 8px 0 0 8px;
+}
+
+form.search-m button {
+    float: left;
+    width: 90px;
+    height: 46px;
+    padding: 10px;
+    background: #6495ED !important;
+    color: white;
+    font-size: 20px;
+    border-left: none;
+    cursor: pointer;
+
+}
+
+form.search-m button:hover {
+    background: #344EA3;
+}
+
+/* Clear floats */
+form.search-m::after {
+    content: "";
+    clear: both;
+    display: table;
+}
