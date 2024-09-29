@@ -1,6 +1,7 @@
 package com.mealplanner.service;
 
 import com.mealplanner.entity.Meal;
+import com.mealplanner.entity.Userdata;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public interface MealService {
     List<Meal> findAllWithCategoryByUserId(Integer id);
 
     List<Meal> sortedMeals(Integer userId, String sortBy);
+
+    List<Meal> searchMealsByName(Userdata userdata, String searchTerm);
+
 
 
 

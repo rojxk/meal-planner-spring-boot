@@ -34,7 +34,7 @@
 
         <div class="middle-row-div">
 
-            <form class="search-m" action="" method="POST">
+            <form class="search-m" th:action="@{|/${username}/meals/search|}" method="POST">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>

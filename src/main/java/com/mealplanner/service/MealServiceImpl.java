@@ -4,6 +4,7 @@ import com.mealplanner.dao.IngredientRepository;
 import com.mealplanner.dao.MealRepository;
 import com.mealplanner.entity.Ingredient;
 import com.mealplanner.entity.Meal;
+import com.mealplanner.entity.Userdata;
 import com.mealplanner.util.MealComparator;
 import com.mealplanner.util.MealSortCriteria;
 import jakarta.persistence.EntityNotFoundException;
@@ -124,6 +125,11 @@ public class MealServiceImpl implements MealService{
 
         meals.sort(new MealComparator(criteria));
         return meals;
+    }
+
+    @Override
+    public List<Meal> searchMealsByName(Userdata user, String searchTerm) {
+        return mealRepository.findByUserdataAndMealNameContainingIgnoreCase(user, searchTerm);
     }
 
 }

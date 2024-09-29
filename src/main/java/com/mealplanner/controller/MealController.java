@@ -159,6 +159,18 @@ public class MealController {
 
     }
 
+    @PostMapping("/{username}/meals/search")
+    @CheckUsername
+    public String searchMeals(@RequestParam("search") String searchTerm,
+                              @PathVariable("username") String username,
+                              Model theModel) {
+        Userdata user = userdataService.findUserdataByUsername(username);
+        List<Meal> searchResults = mealService.searchMealsByName(user, searchTerm);
+        theModel.addAttribute("meals", searchResults);
+        theModel.addAttribute("username", username);
+        return "meals/main-meal-planner";
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
