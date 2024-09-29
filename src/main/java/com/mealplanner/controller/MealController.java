@@ -46,7 +46,6 @@ public class MealController {
     public String list(Model theModel,
                        @PathVariable("username") String username) {
         Integer userId = userdataService.findUserdataByUsername(username).getId();
-        //List<Meal> theMeals = mealService.findAllWithCategoryByUserId(userId);
         List<Meal> theMeals = mealService.sortedMeals(userId,"category");
         theModel.addAttribute("meals", theMeals);
         theModel.addAttribute("username", username);
