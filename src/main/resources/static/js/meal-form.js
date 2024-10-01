@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Form submission event listener
-    document.querySelector('form').addEventListener('submit', function(e) {
+    document.getElementById('mealForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
         // Remove any existing ingredient inputs
@@ -108,6 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
         this.submit();
 
     });
+
+    document.getElementById('logoutForm').addEventListener('submit', function(e) {
+
+    });
+
 
 });
 
