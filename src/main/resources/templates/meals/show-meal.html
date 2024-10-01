@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/meals/components/modal.css">
     <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="center-container">
@@ -34,7 +35,7 @@
             <p th:text="${meal.mealDescription}"></p>
             <div class="bottom-div">
                 <a href="#"
-                   class="button-main btn-cancel delete-button"
+                   class="button-main btn-delete"
                    th:data-meal-id="${meal.id}" th:data-username="${username}">
                     Delete
                 </a>
@@ -54,7 +55,7 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
+<script>
     $(document).ready(function() {
         $('.delete-button').click(function(e) {
             e.preventDefault();
