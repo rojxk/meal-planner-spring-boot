@@ -55,14 +55,15 @@
         </div>
     </div>
 </div>
-<script>
+<script th:inline="javascript">
+
     var username = /*[[${username}]]*/ '';
+
     $(document).ready(function() {
         $('.delete-button').click(function(e) {
             e.preventDefault();
             $('#deleteModal').css('display', 'block');
             window.currentMealId = $(this).data('meal-id');
-            window.currentUsername = $(this).data('username');
         });
     });
 
