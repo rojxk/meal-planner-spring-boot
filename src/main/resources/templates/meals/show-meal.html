@@ -35,11 +35,11 @@
             <p th:text="${meal.mealDescription}"></p>
             <div class="bottom-div">
                 <a href="#"
-                   class="button-main btn-delete"
+                   class="button-main delete-button"
                    th:data-meal-id="${meal.id}" th:data-username="${username}">
                     Delete
                 </a>
-                <a th:href="@{/meals/update-meal(mealId=${meal.id})}" class="button-main btn-right">Update</a>
+                <a th:href="@{'/' + ${username} +'/meals/update-meal'(mealId=${meal.id})}" class="button-main btn-right">Update</a>
             </div>
         </div>
     </div>
@@ -56,6 +56,7 @@
     </div>
 </div>
 <script>
+    var username = /*[[${username}]]*/ '';
     $(document).ready(function() {
         $('.delete-button').click(function(e) {
             e.preventDefault();
@@ -70,9 +71,9 @@
     }
 
     function confirmDelete() {
-        var username = /*[[${username}]]*/ '';
         var mealId = window.currentMealId;
-        window.location.href = '/' + encodeURIComponent(username) + '/meals/delete?mealId=' + encodeURIComponent(mealId);
+        var baseUrl = 'http://localhost:8080';
+        window.location.href = baseUrl + '/' + encodeURIComponent(username) + '/meals/delete?mealId=' + encodeURIComponent(mealId);
     }
 
     window.onclick = function(event) {

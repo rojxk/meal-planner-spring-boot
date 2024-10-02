@@ -43,3 +43,9 @@
     margin-top: 5px;
     margin-bottom: 10px;
 }
+
+.text-no-meals {
+    margin-left: 23px;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #330300;
+}

@@ -3,7 +3,7 @@ form.search-m input[type=text] {
     font-size: 20px;
     border: none;
     float: left;
-    width: calc(100% - 250px);
+    width: calc(100% - 242px);
     background: #B1C5EC;
     height: 50px;
     padding: 0 0 0 23px;
@@ -12,7 +12,7 @@ form.search-m input[type=text] {
 
 form.search-m button {
     float: left;
-    width: 85px;
+    width: 103px;
     height: 50px;
     padding: 10px;
     background: #6495ED !important;
@@ -33,4 +33,70 @@ form.search-m::after {
     content: "";
     clear: both;
     display: table;
+}
+
+.search-with-x {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+}
+
+.clear-search {
+    position: absolute;
+    right: 90px; /* Adjust this value to position the X */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.clear-search:hover {
+    color: #333;
+}
+
+.search-label {
+    box-sizing: border-box;
+    font-size: 20px;
+    border: none;
+    float: left;
+    background: #B1C5EC;
+    height: 50px;
+    padding: 0 50px 0 23px;
+    border-radius: 8px 0 0 8px;
+}
+
+a.search-l {
+    float: left;
+    margin-left: 23px;
+    margin-top: 12px;
+    margin-right: 23px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #330300;
+}
+
+.search-x-button {
+    float: left;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background: #344EA3;
+    height: 50px;
+    width: 50px;
+    border-radius: 0 8px 8px 0;
+    color: #FFF6EB;
+    font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-x-button:hover {
+    background-color: #1A2788
 }

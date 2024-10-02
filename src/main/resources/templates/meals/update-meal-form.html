@@ -18,9 +18,9 @@
         <div class="square-div">
 
             <div class="top-row-div">
-                <a th:href="@{/meals/list}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
+                <a th:href="@{|/${username}/meals/list|}" class="button-main btn-back">&#129032 &nbsp;&nbsp; Back to planner</a>
                 <p class="top-meal-planner">Meal Planner</p>
-                <form action="#" th:action="@{/logout}" method="POST">
+                <form id="logoutForm" action="#" th:action="@{/logout}" method="POST">
                     <input class="button-main btn-right" type="submit" value="Log out"/>
                 </form>
             </div>
@@ -32,7 +32,7 @@
 
 
             <div>
-                <form action="#" th:action="@{/meals/save}" th:object="${meal}" method="POST">
+                <form id="mealForm" action="#" th:action="@{|/${username}/meals/save|}" th:object="${meal}" method="POST">
                     <!-- Meal fields -->
                     <div class="middle-row-add-div">
                         <input type="hidden" th:field="*{id}">

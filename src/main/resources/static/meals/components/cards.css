@@ -3,10 +3,9 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 
-    /* Add these properties */
-    height: 530px; /* Or any other fixed height */
+    height: 530px;
     overflow-y: auto;
-    padding-right: 10px; /* To prevent content from being hidden behind the scrollbar */
+    /*padding-right: 10px; !* To prevent content from being hidden behind the scrollbar *!*/
 }
 
 .cards-container::-webkit-scrollbar {
@@ -15,12 +14,13 @@
 
 .cards-container::-webkit-scrollbar-track {
     background: #FFFBF6;
+    padding-left: 10px;
 }
 
 .cards-container::-webkit-scrollbar-thumb {
     background-color: #344EA3;
     border-radius: 5px;
-    border: 3px solid #FFFBF6;
+    border: 3px solid #FFF6EB;
 }
 
 .card {

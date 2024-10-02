@@ -34,14 +34,21 @@
 
         <div class="middle-row-div">
 
-            <form class="search-m" th:action="@{|/${username}/meals/search|}" method="POST">
-                <input type="text" placeholder="Search.." name="search">
+            <form  th:if="${searchBy == null}" class="search-m" th:action="@{|/${username}/meals/search|}" method="POST">
+                <label>
+                    <input type="text" placeholder="Search.." name="search">
+                </label>
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
+            <label th:if="${searchBy != null}" >
+                <a class="search-l">Searched by:</a>
+                <a th:text="${searchBy}" class="search-label"></a>
+                <a th:href="@{|/${username}/meals/list|}" class="search-x-button" >X</a>
+            </label>
 
-            <select class="button-main btn-sort" id="sortSelect" onchange="sortMeals()">
+            <select class="button-main btn-right" id="sortSelect" onchange="sortMeals()">
                 <option value="" disabled selected>Sort by</option>
-                <option value="">The oldest</option>
+                <option value="oldest">The oldest</option>
                 <option value="newest">The newest</option>
                 <option value="name_az">Name A-Z</option>
                 <option value="name_za">Name Z-A</option>
@@ -52,7 +59,7 @@
         </div>
 
         <div class="middle-div">
-            <div id="mealsContainer" class="cards-container" th:if="${not #lists.isEmpty(meals)}">
+            <div id="mealsContainer" class="cards-container" th:if="${(not #lists.isEmpty(meals))}">
                 <a th:href="@{'/' + ${username} + '/meals/show-meal'(mealId=${tempMeal.id}) }" class="card" th:each="tempMeal : ${meals}">
                     <input type="hidden" name="mealId" th:value="${tempMeal.id}" />
                     <div class="card-content">
@@ -67,8 +74,8 @@
                     </div>
                 </a>
             </div>
-            <div th:if="${#lists.isEmpty(meals)}" class="no-meals-message">
-                <p>You haven't added any meals yet. Click "New Meal" to get started!</p>
+            <div th:if="${(#lists.isEmpty(meals))  && (searchBy != null)}" class="no-meals-message">
+                <p class="text-no-meals">No meals with "<span th:text="${searchBy}"></span>". Try adding some meals.</p>
             </div>
         </div>
     </div>

@@ -114,6 +114,7 @@ public class MealServiceImpl implements MealService{
     public List<Meal> sortedMeals(Integer userId, String sortBy) {
         List<Meal> meals = mealRepository.findAllWithCategoryByUserId(userId);
         MealSortCriteria criteria = switch (sortBy.toLowerCase()) {
+            case "oldest" -> MealSortCriteria.DEFAULT;
             case "newest" -> MealSortCriteria.NEWEST;
             case "name_az" -> MealSortCriteria.NAME_AZ;
             case "name_za" -> MealSortCriteria.NAME_ZA;
