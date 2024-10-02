@@ -25,14 +25,19 @@
             </div>
 
             <div class="top-middle-add-div">
-                <p class="fancy-text" th:text="${meal.mealName}"></p>
+                <p class="distinctive-text" th:text="${meal.mealName}"></p>
             </div>
 
-            HELLO
-            <p th:text="${meal != null} ? ${meal.mealName} : 'Meal is null'"></p>
-            <p th:text="${meal}"></p>
-            <p th:text="${meal.ingredients}"></p>
-            <p th:text="${meal.mealDescription}"></p>
+            <div class="middle-div">
+                <p class="distinctive-text">Ingredients:</p>
+                <ul th:if="${meal.ingredients != null}" th:each="ingredient : ${meal.ingredients}">
+                    <li th:text="${ingredient.ingredient}${ingredient.quantity}${ingredient.measure}"></li>
+
+                </ul>
+            </div>
+
+
+            <p th:text="${meal.mealDescription.description}"></p>
             <div class="bottom-div">
                 <a href="#"
                    class="button-main btn-meal-delete"
