@@ -28,6 +28,20 @@
     width: 120px;
 }
 
+.btn-meal-delete {
+    position: relative;
+    float: right;
+    margin-right: 130px;
+    width: 120px;
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.btn-meal-delete:hover {
+    background-color: #ff3333 !important;
+}
+
+
 .btn-sort {
     right: 20px;
     width: 125px;

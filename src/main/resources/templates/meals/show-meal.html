@@ -35,7 +35,7 @@
             <p th:text="${meal.mealDescription}"></p>
             <div class="bottom-div">
                 <a href="#"
-                   class="button-main delete-button"
+                   class="button-main btn-meal-delete"
                    th:data-meal-id="${meal.id}" th:data-username="${username}">
                     Delete
                 </a>
@@ -60,7 +60,7 @@
     var username = /*[[${username}]]*/ '';
 
     $(document).ready(function() {
-        $('.delete-button').click(function(e) {
+        $('.btn-meal-delete').click(function(e) {
             e.preventDefault();
             $('#deleteModal').css('display', 'block');
             window.currentMealId = $(this).data('meal-id');
