@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/meals/components/fields.css">
     <link rel="stylesheet" href="/meals/components/text.css">
     <link rel="stylesheet" href="/meals/components/modal.css">
+    <link rel="stylesheet" href="/meals/components/containers.css">
     <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,16 +25,22 @@
                 </form>
             </div>
 
+            <div class="top-middle-div">
+                <p class="distinctive-text"><span th:text="${username}">User</span>'s Meal planner</p>
+            </div>
+
             <div class="top-middle-add-div">
                 <p class="distinctive-text" th:text="${meal.mealName}"></p>
             </div>
 
-            <div class="middle-div">
-                <p class="distinctive-text">Ingredients:</p>
-                <ul th:if="${meal.ingredients != null}" th:each="ingredient : ${meal.ingredients}">
-                    <li th:text="${ingredient.ingredient}${ingredient.quantity}${ingredient.measure}"></li>
+            <div class="middle-show-div">
+                <p class="distinctive-text" style="padding-left:15px">Ingredients:</p>
+                <div class="show-ingredients-container">
+                    <ul th:if="${meal.ingredients != null}" th:each="ingredient : ${meal.ingredients}">
+                        <li th:text="${ingredient.ingredient}"></li>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
 
 

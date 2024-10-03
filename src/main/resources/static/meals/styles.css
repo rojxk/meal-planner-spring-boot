@@ -174,9 +174,19 @@ a {
     width: 300px;
 }
 
-/* for add - recipe
+/* fos show - ingredients
  */
-.bottom-div-recipe {
+.middle-show-div {
+    position: absolute;
+    left: 0;
+    top: 350px;
+    width: 100%;
+    height: 300px;
+}
+
+/* for add - description
+ */
+.bottom-div-description {
     height: 20svh;
     width: 100%;
     position: absolute;
