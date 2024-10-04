@@ -91,7 +91,7 @@ a {
     top: 70px;
     left: 0;
     width: 100%;
-    height: calc(80svh - 500px);
+    height: calc(65svh - 500px);
     padding: 10px 10px 0 15px;
     display: flex;
     flex-direction: column;
@@ -116,7 +116,7 @@ a {
  */
 .middle-row-add-div {
     position: absolute;
-    bottom: calc(20svh + 360px);
+    bottom: calc(35svh + 360px);
     left: 0;
     width: 100%;
     height: 50px;
@@ -139,7 +139,7 @@ a {
 .middle-add-div {
     position: absolute;
     left: 0;
-    bottom: calc(20svh + 80px);
+    bottom: calc(35svh + 80px);
     height: 280px;
     width: 100%;
 }
@@ -190,7 +190,7 @@ a {
     height: 20svh;
     width: 100%;
     position: absolute;
-    bottom: 70px;
+    bottom: calc(75px + 10svh);
     left: 0;
 }
 
