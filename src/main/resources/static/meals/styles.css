@@ -88,7 +88,7 @@ a {
 */
 .top-middle-add-div {
     position: absolute;
-    top: 70px;
+    top: calc(70px + 10svh);
     left: 0;
     width: 100%;
     height: calc(65svh - 500px);
@@ -116,7 +116,7 @@ a {
  */
 .middle-row-add-div {
     position: absolute;
-    bottom: calc(35svh + 360px);
+    bottom: calc(25svh + 350px);
     left: 0;
     width: 100%;
     height: 50px;
@@ -139,7 +139,7 @@ a {
 .middle-add-div {
     position: absolute;
     left: 0;
-    bottom: calc(35svh + 80px);
+    bottom: calc(25svh + 85px);
     height: 280px;
     width: 100%;
 }
@@ -190,7 +190,7 @@ a {
     height: 20svh;
     width: 100%;
     position: absolute;
-    bottom: calc(75px + 10svh);
+    bottom: calc(75px + 5svh);
     left: 0;
 }
 
