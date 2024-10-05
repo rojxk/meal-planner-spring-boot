@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="/meals/styles.css">
     <link rel="stylesheet" href="/meals/components/buttons.css">
     <link rel="stylesheet" href="/meals/components/fields.css">
+    <link rel="stylesheet" href="/meals/components/modal.css">
     <link rel="stylesheet" href="/meals/components/text.css">
     <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
-<body>
+<body data-username="${username}">
 <div class="center-container">
     <div class="background-div">
         <div class="square-div">
@@ -103,6 +104,18 @@
         </div>
     </div>
 </div>
+
+<div id="cancelModal" class="modal">
+    <div class="modal-content">
+        <p class="distinctive-text">Cancel creating meal?</p>
+        <p class="text-modal">Any unsaved changes will be lost</p>
+        <div class="modal-buttons">
+            <button class="btn btn-cancel" >No</button>
+            <button class="btn btn-delete" >Yes</button>
+        </div>
+    </div>
+</div>
+
 <script th:src="@{/js/meal-form.js}"></script>
 </body>
 </html>
