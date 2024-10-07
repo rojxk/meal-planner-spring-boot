@@ -114,5 +114,51 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+    // Cancel modal functionality
+    const modal = document.getElementById("cancelModal");
+    const cancelButton = document.querySelector('.button-main.btn-cancel.btn-submit');
+
+    function showCancelConfirmation(event) {
+        event.preventDefault(); // Prevent the default button action
+        modal.style.display = "block";
+    }
+
+    function closeCancelModal() {
+        modal.style.display = "none";
+    }
+
+    function confirmCancel() {
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/');
+        const encodedUsername = pathParts[1]; // This should be the encoded username
+        const baseUrl = window.location.origin; // This will get the correct base URL dynamically
+        window.location.href = `${baseUrl}/${encodedUsername}/meals/list`;
+    }
+
+    // Event listeners for modal functionality
+    if (cancelButton) {
+        cancelButton.addEventListener('click', showCancelConfirmation);
+    }
+
+    const closeModalButton = document.querySelector('.btn.btn-cancel');
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', closeCancelModal);
+    }
+
+    const confirmCancelButton = document.querySelector('.btn.btn-confirm');
+    if (confirmCancelButton) {
+        confirmCancelButton.addEventListener('click', confirmCancel);
+    }
+
+    // Close the modal if the user clicks outside of it
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            closeCancelModal();
+        }
+    });
+
+
+
+
 });
 
