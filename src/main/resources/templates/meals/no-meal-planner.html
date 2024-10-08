@@ -56,10 +56,12 @@
                 <div id="mealsContainer" class="cards-container" >
                     <a th:href="@{'/' + ${username} + '/meals/add-meal' }" class="card-add" >
                         <div class="card-content">
-                            <div class="card-title">
-                                <p class="cards-text">+ Add first meal</p>
+                            <div class="icon-container">
+                                <img src="/images/add-sign.jpg" alt="Add meal icon" class="add-icon">
                             </div>
-
+                            <div class="card-title">
+                                <p class="add-text">Add first meal</p>
+                            </div>
                         </div>
                     </a>
                 </div>

@@ -12,6 +12,12 @@
     font-weight: bold;
 }
 
+.add-text {
+    margin: 0;
+    color: #344EA3;
+    font-weight: bold;
+}
+
 .text-min {
     color: #330300;
     position: absolute;
