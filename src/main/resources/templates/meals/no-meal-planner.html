@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/meals/styles.css">
+    <link rel="stylesheet" href="/meals/components/cards.css">
+    <link rel="stylesheet" href="/meals/components/buttons.css">
+    <link rel="stylesheet" href="/meals/components/fields.css">
+    <link rel="stylesheet" href="/meals/components/text.css">
+    <link rel="stylesheet" href="/meals/components/search.css">
+    <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="center-container">
+    <div class="background-div">
+        <div class="square-div">
+
+            <div class="top-row-div">
+                <a th:href="@{|/${username}/meals/add-meal|}" class="button-main btn-new">+&nbsp;&nbsp;&nbsp;&nbsp; New Meal</a>
+                <form action="#" th:action="@{/logout}" method="POST">
+                    <input class="button-main btn-right" type="submit" value="Log out"/>
+                </form>
+            </div>
+
+
+            <div class="top-middle-div">
+                <p class="distinctive-text"><span th:text="${username}">User</span>'s Meal planner</p>
+            </div>
+
+            <div class="middle-row-div">
+
+                <form  th:if="${searchBy == null}" class="search-m" th:action="@{|/${username}/meals/search|}" method="POST">
+                    <label>
+                        <input type="text" placeholder="Search.." name="search">
+                    </label>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <label th:if="${searchBy != null}" >
+                    <a class="search-l">Searched by:</a>
+                    <a th:text="${searchBy}" class="search-label"></a>
+                    <a th:href="@{|/${username}/meals/list|}" class="search-x-button" >X</a>
+                </label>
+
+                <select class="button-main btn-right" id="sortSelect">
+                    <option value="" disabled selected>&nbsp;&nbsp;&nbsp;Add meal to sort&nbsp;&nbsp;&nbsp;</option>
+                    <option value="" disabled selected>Sort by</option>
+                </select>
+            </div>
+
+            <div class="middle-div">
+                <div id="mealsContainer" class="cards-container" >
+                    <a th:href="@{'/' + ${username} + '/meals/add-meal' }" class="card-add" >
+                        <div class="card-content">
+                            <div class="card-title">
+                                <p class="cards-text">+ Add first meal</p>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

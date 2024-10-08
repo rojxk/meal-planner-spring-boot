@@ -11,6 +11,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,9 +50,19 @@ public class MealController {
                        @PathVariable("username") String username) {
         Integer userId = userdataService.findUserdataByUsername(username).getId();
         List<Meal> theMeals = mealService.sortedMeals(userId,"name_az");
-        theModel.addAttribute("meals", theMeals);
         theModel.addAttribute("username", username);
-        return "meals/main-meal-planner";
+
+        theMeals = theMeals.stream().filter(Objects::nonNull).collect(Collectors.toList());
+
+        if(theMeals.isEmpty()){
+            return "meals/no-meal-planner";
+        } else {
+            logger.warn(theMeals.toString());
+            theModel.addAttribute("meals", theMeals);
+            return "meals/main-meal-planner";
+
+        }
+
     }
 
     @GetMapping("/{username}/meals/add-meal")
@@ -154,6 +167,7 @@ public class MealController {
         List<Meal> theMeals = mealService.sortedMeals(userId,sortBy);
         theModel.addAttribute("meals", theMeals);
         theModel.addAttribute("username", username);
+
         return "meals/main-meal-planner";
 
     }
