@@ -164,8 +164,8 @@
 
 .btn-delete {
     background-color: #ff4d4d !important;
-    color: white;
-    margin: 0 5px 0 10px;
+    color: white !important;
+    margin: 0 5px 0 5px;
 }
 .btn-delete:hover {
     background-color: #ff3333;
@@ -173,7 +173,7 @@
 .btn-cancel {
     background-color: #f0f0f0 !important;
     color: #333;
-    margin: 0 10px 0 5px;
+    margin: 0 5px 0 5px;
 }
 .btn-cancel:hover {
     background-color: #e0e0e0;
