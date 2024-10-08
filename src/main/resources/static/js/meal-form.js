@@ -145,10 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
         closeModalButton.addEventListener('click', closeCancelModal);
     }
 
-    const confirmCancelButton = document.querySelector('.btn.btn-confirm');
+    const confirmCancelButton = document.getElementById('yes');
     if (confirmCancelButton) {
         confirmCancelButton.addEventListener('click', confirmCancel);
     }
+
 
     // Close the modal if the user clicks outside of it
     window.addEventListener('click', function(event) {

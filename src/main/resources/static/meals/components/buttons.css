@@ -85,7 +85,8 @@
 }
 
 .btn-cancel {
-    background-color: #b44444;
+    background-color: #b44444 !important;
+    color: #e0e0e0;
     width: 120px;
     right: 120px;
 }
@@ -160,18 +161,19 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
 }
+
 .btn-delete {
-    background-color: #ff4d4d;
+    background-color: #ff4d4d !important;
     color: white;
-    margin: 0 0 0 10px;
+    margin: 0 5px 0 10px;
 }
 .btn-delete:hover {
     background-color: #ff3333;
 }
 .btn-cancel {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0 !important;
     color: #333;
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 5px;
 }
 .btn-cancel:hover {
     background-color: #e0e0e0;
