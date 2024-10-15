@@ -54,11 +54,16 @@
                     <div class="ingredients-list" th:if="${meal.ingredients != null}" >
                         <div class="ingredient-row" th:each="ingredient : ${meal.ingredients}">
                             <div class="ingredient-quantity" th:text="${ingredient.quantity}"></div>
-                            <div class="ingredient-measure" th:text="${ingredient.measure.measure}"></span>
+                            <div class="ingredient-measure" th:text="${ingredient.measure.measure}"></div>
                             <div class="ingredient-name" th:text="${ingredient.ingredient}"></div>
-                        </li>
+                        </div>
+                    </div>
+                    <div th:if="${meal.mealDescription.description != null}">
+                        <p class="distinctive-text">DETAILS:</p>
+                        <p th:text="${meal.mealDescription.description}"></p>
                     </div>
                 </div>
+
             </div>
 
 

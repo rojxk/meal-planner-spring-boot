@@ -298,27 +298,25 @@ input[type="number"].fld-time:focus:-ms-input-placeholder {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
+    padding-left: 0;
 }
 .ingredient-row {
-    display: table-row;
-}
-.ingredient-quantity,
-.ingredient-name,
-.ingredient-measure{
-    display: table-cell;
-    font-size: 18px;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
 }
 .ingredient-quantity {
+    flex: 0 0 60px; /* Adjust width as needed */
     font-weight: bold;
-    padding-right: 20px;
-    white-space: nowrap;
-}
-.ingredient-quantity::before {
-    content: "•";
-    margin-right: 10px;
-    color: #4a0e0e;
+    text-align: right;
+    padding-right: 10px;
 }
 
+.ingredient-name {
+    flex: 1;
+    padding: 0 10px;
+}
 .ingredient-measure {
-    white-space: nowrap;
+    flex: 0 0 30px; /* Adjust width as needed */
+    text-align: left;
 }
