@@ -11,6 +11,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 import java.util.function.Supplier;
@@ -38,18 +39,18 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(configurer ->
-                configurer
-                        .requestMatchers("/login-page", "/meals/**").permitAll()
-                        .requestMatchers("/").hasRole("USER")
-                        .anyRequest().authenticated()
-        )
-        .formLogin(form ->
-                form
-                        .loginPage("/login-page")
-                        .loginProcessingUrl("/authenticate-user")
-                        .successHandler(authenticationSuccessHandler)
-                        .permitAll()
-        )
+                        configurer
+                                .requestMatchers("/login-page", "/meals/**").permitAll()
+                                .requestMatchers("/").hasRole("USER")
+                                .anyRequest().authenticated()
+                )
+                .formLogin(form ->
+                        form
+                                .loginPage("/login-page")
+                                .loginProcessingUrl("/authenticate-user")
+                                .successHandler(authenticationSuccessHandler)
+                                .permitAll()
+                )
                 .logout(logout -> logout.permitAll())
                 .exceptionHandling(configurer ->
                         configurer.accessDeniedPage("/access-denied")
