@@ -61,7 +61,7 @@ Follow these steps to run Meal Planner locally:
 ### Steps
 1. **Clone repository**
 ```
-git clone https://github.com/rojxk/meal-planner.git
+git clone https://github.com/rojxk/meal-planner-spring-boot.git
 cd meal-planner
 ```
 2. **Configure database**
