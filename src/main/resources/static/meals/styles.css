@@ -256,3 +256,69 @@ input[type="number"].fld-portion:focus:-ms-input-placeholder,
 input[type="number"].fld-time:focus:-ms-input-placeholder {
     color: transparent; /* Hide placeholder on focus for IE/Edge */
 }
+
+/* For show meal */
+.meal-details {
+    position: absolute;
+    top: 230px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.meal-info {
+    width: 24%;
+}
+.ingredients {
+    padding-left: 40px;
+    width: 75%;
+    border-left-color: #330300;
+    border-left-style: solid;
+    border-left-width: 4px;
+}
+.image-box {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-justify: distribute-center-last;
+}
+.image-box img {
+    height: 40%;
+    width: auto;
+
+    max-width: 150px;
+}
+.image-box label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.ingredients-list {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+.ingredient-row {
+    display: table-row;
+}
+.ingredient-quantity,
+.ingredient-name,
+.ingredient-measure{
+    display: table-cell;
+    font-size: 18px;
+}
+.ingredient-quantity {
+    font-weight: bold;
+    padding-right: 20px;
+    white-space: nowrap;
+}
+.ingredient-quantity::before {
+    content: "•";
+    margin-right: 10px;
+    color: #4a0e0e;
+}
+
+.ingredient-measure {
+    white-space: nowrap;
+}

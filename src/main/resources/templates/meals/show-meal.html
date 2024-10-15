@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/meals/components/text.css">
     <link rel="stylesheet" href="/meals/components/modal.css">
     <link rel="stylesheet" href="/meals/components/containers.css">
+    <link rel="stylesheet" href="/meals/components/cards.css">
     <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -33,18 +34,38 @@
                 <p class="distinctive-text" th:text="${meal.mealName}"></p>
             </div>
 
-            <div class="middle-show-div">
-                <p class="distinctive-text" style="padding-left:15px">Ingredients:</p>
-                <div class="show-ingredients-container">
-                    <ul th:if="${meal.ingredients != null}" th:each="ingredient : ${meal.ingredients}">
-                        <li th:text="${ingredient.ingredient}"></li>
-
-                    </ul>
+            <div class="meal-details">
+                <div class="meal-info">
+                    <div class="image-box">
+                        <img src="/images/category.png" alt="Category">
+                        <p class="cards-text"> <span th:text="${meal.category.category}"></span></p>
+                    </div>
+                    <div class="image-box">
+                        <img src="/images/portions.png" alt="Portions">
+                        <p class="cards-text"> <span th:text="${meal.portions}"></span> portion(s)</p>
+                    </div>
+                    <div class="image-box">
+                        <img src="/images/time.png" alt="Making Time">
+                        <p class="cards-text"> <span th:text="${meal.makingTime}"></span> min</p>
+                    </div>
+                </div>
+                <div class="ingredients">
+                    <p class="distinctive-text">INGREDIENTS:</p>
+                    <div class="ingredients-list" th:if="${meal.ingredients != null}" >
+                        <div class="ingredient-row" th:each="ingredient : ${meal.ingredients}">
+                            <div class="ingredient-quantity" th:text="${ingredient.quantity}"></div>
+                            <div class="ingredient-measure" th:text="${ingredient.measure.measure}"></span>
+                            <div class="ingredient-name" th:text="${ingredient.ingredient}"></div>
+                        </li>
+                    </div>
                 </div>
             </div>
 
 
-            <p th:text="${meal.mealDescription.description}"></p>
+
+
+
+
             <div class="bottom-div">
                 <a href="#"
                    class="button-main btn-meal-delete"
