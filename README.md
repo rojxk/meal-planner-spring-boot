@@ -21,17 +21,18 @@ Meal Planner is a web application built with Spring Boot that simplifies the pro
 - Responsive desktop design
 
 ## 🔎 Overview
+🔓 *User authentication:*
 ![gif](/assets/gifs/login-page.gif)
-🔓 *User authentication* 
 
+➕ *Add meal:*
 ![gif](/assets/gifs/add-meal.gif)
-➕ *Add meal*
 
+🔎 *Search:*
 ![gif](/assets/gifs/search.gif)
-🔎 *Search*
 
+❌ *Delete meal:*
 ![gif](/assets/gifs/delete-meal.gif)
-❌ *Delete meal*
+
 
 ## 📘 Database Schema
 
